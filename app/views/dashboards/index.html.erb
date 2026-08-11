@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <%= render 'dashboards/dashboard_styles' %>
+</head>
+<body>
+  <header>
+    <div class="container top">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button id="burgerToggle" class="btn">☰</button>
+        <div class="brand">Portfolio API — Admin</div>
+      </div>
+
+      <div class="actions">
+        <%= button_to 'Logout', logout_path, method: :delete, class: 'btn' %>
+      </div>
+    </div>
+  </header>
+
+  <div id="sideMenu" style="position:fixed;left:0;top:64px;bottom:0;width:220px;background:#fff;padding:12px;box-shadow:2px 0 12px rgba(0,0,0,.06);z-index:80">
+    <h4 style="margin:6px 0 12px">Content</h4>
+    <nav>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px"><a href="/dashboard" style="color:#0b5fff;font-weight:600;text-decoration:none">Dashboard</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_profile_path %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Profile</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('projects') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Projects</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('skills') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Skills</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('experiences') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Experiences</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('education') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Education</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('contact_messages') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Contact Messages</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('memory_log_entries') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Memory Logs</a></li>
+        <li style="margin-bottom:8px"><a href="<%= admin_resource_path('admins') %>" style="color:#0b5fff;font-weight:600;text-decoration:none">Admins</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main class="container" style="padding-left:240px">
+    <div class="grid">
+      <section class="card">
+        <h2>Welcome to the CMS</h2>
+        <p class="muted">Use the left menu to manage content. This interface is a lightweight CMS admin for your portfolio backend.</p>
+
+        <p style="margin-top:16px" class="muted">Signed in as <strong><%= current_admin&.email || 'Unknown' %></strong></p>
+
+        <h3 style="margin-top:18px">Quick actions</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+          <div style="flex:1 1 200px;min-width:180px" class="card">
+            <h4 style="margin:0 0 6px">Create Project</h4>
+            <div class="small">Add a new portfolio project from the API or future CMS form.</div>
+            <div style="margin-top:10px"><a class="primary" href="<%= admin_resource_path('projects') %>">Open</a></div>
+          </div>
+
+          <div style="flex:1 1 200px;min-width:180px" class="card">
+            <h4 style="margin:0 0 6px">View Contact Messages</h4>
+            <div class="small">Check messages sent from the site contact form.</div>
+            <div style="margin-top:10px"><a class="primary" href="<%= admin_resource_path('contact_messages') %>">Open</a></div>
+          </div>
+        </div>
+
+        <div id="actionResult" style="margin-top:14px"><pre id="resultPre">Server session login active</pre></div>
+      </section>
+
+      <aside class="card">
+        <h4>Tips</h4>
+        <ul class="small">
+          <li>Keep your token private — this page stores it in localStorage for convenience.</li>
+          <li>Use the <strong>Copy Authorization header</strong> to paste into API clients ("Authorization: Bearer &lt;token&gt;").</li>
+          <li>Logout clears the stored token and returns to the login page.</li>
+        </ul>
+
+        <h4 style="margin-top:12px">Mobile friendly</h4>
+        <p class="small">Layout collapses to a single column on small screens. Buttons are large enough for touch.</p>
+      </aside>
+    </div>
+  </main>
+
+
+</body>
+</html>

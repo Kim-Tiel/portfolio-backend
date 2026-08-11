@@ -1,0 +1,45 @@
+<script>
+  // If token already exists, go to dashboard automatically
+  (function(){
+    try{ if(localStorage.getItem('portfolio_api_token')) window.location.href = '/dashboard' }catch(e){}
+  })()
+
+  const form = document.getElementById('loginForm')
+  const submitBtn = document.getElementById('submit')
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault()
+    submitBtn.disabled = true
+    submitBtn.textContent = 'Signing in...'
+
+    const email = document.getElementById('email').value.trim()
+    const password = document.getElementById('password').value
+
+    try{
+      const res = await fetch('/api/v1/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      })
+
+      const body = await res.json().catch(()=>({}))
+
+      if(res.ok){
+        if(body.token){
+          localStorage.setItem('portfolio_api_token', body.token)
+          // Redirect to dashboard after successful login
+          window.location.href = '/dashboard'
+        } else {
+          showResult({ message: 'Login successful', body }, true)
+        }
+      } else {
+        showResult({ status: res.status, error: body.error || body }, false)
+      }
+    }catch(err){
+      showResult({ error: err.message }, false)
+    } finally {
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Sign in'
+    }
+  })
+</script>

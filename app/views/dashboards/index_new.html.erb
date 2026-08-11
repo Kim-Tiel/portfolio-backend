@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <%= render 'dashboards/dashboard_styles' %>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="left">
+        <button id="burgerToggle" class="burger" aria-label="Toggle menu">☰</button>
+        <div class="brand">Portfolio API — Admin</div>
+      </div>
+
+      <div class="right actions">
+        <%= button_to 'Logout', logout_path, method: :delete, class: 'btn logout' %>
+      </div>
+    </div>
+  </header>
+
+  <div id="sideMenu" class="side-menu" aria-hidden="false">
+    <h4 class="menu-title">Content</h4>
+    <nav>
+      <ul class="menu-list">
+        <li><a href="/dashboard" class="menu-link">Dashboard</a></li>
+        <li><a href="<%= admin_profile_path %>" class="menu-link">Profile</a></li>
+        <li><a href="<%= admin_resource_path('projects') %>" class="menu-link">Projects</a></li>
+        <li><a href="<%= admin_resource_path('skills') %>" class="menu-link">Skills</a></li>
+        <li><a href="<%= admin_resource_path('experiences') %>" class="menu-link">Experiences</a></li>
+        <li><a href="<%= admin_resource_path('education') %>" class="menu-link">Education</a></li>
+        <li><a href="<%= admin_resource_path('contact_messages') %>" class="menu-link">Contact Messages</a></li>
+        <li><a href="<%= admin_resource_path('memory_log_entries') %>" class="menu-link">Memory Logs</a></li>
+        <li><a href="<%= admin_resource_path('admins') %>" class="menu-link">Admins</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main class="container main-content">
+    <div class="grid">
+      <section class="card hero">
+        <h2>Welcome to the CMS</h2>
+        <p class="muted">Use the left menu to manage content. This interface is a lightweight CMS admin for your portfolio backend.</p>
+
+        <p class="muted login-info">Signed in as <strong><%= current_admin&.email || 'Unknown' %></strong></p>
+
+        <h3 class="section-title">Quick actions</h3>
+
+        <div class="actions-row">
+          <div class="action-card card">
+            <h4>Create Project</h4>
+            <p class="small">Add a new portfolio project from the API or future CMS form.</p>
+            <a class="primary" href="<%= admin_resource_path('projects') %>">Open</a>
+          </div>
+
+          <div class="action-card card">
+            <h4>View Contact Messages</h4>
+            <p class="small">Check messages sent from the site contact form.</p>
+            <a class="primary" href="<%= admin_resource_path('contact_messages') %>">Open</a>
+          </div>
+        </div>
+
+        <div id="actionResult" class="server-note"><pre id="resultPre">Server session login active</pre></div>
+      </section>
+
+      <aside class="card side-panel">
+        <h4>About this CMS</h4>
+        <ul class="small">
+          <li>Manage content used by the frontend (separate Vue app) from these pages.</li>
+          <li>This CMS is intentionally minimal — add CRUD forms when ready.</li>
+          <li>Use the side menu to navigate resources on desktop; tap the ☰ button on mobile.</li>
+        </ul>
+
+        <h4 class="mt">Mobile</h4>
+        <p class="small">On small screens the side menu is collapsed behind the burger button for a clean touch-first experience.</p>
+      </aside>
+    </div>
+  </main>
+
+  <%= render 'dashboards/dashboard_scripts' %>
+
+</body>
+</html>

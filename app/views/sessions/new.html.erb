@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio API — Login</title>
+  <%= render 'sessions/login_styles' %>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Admin Login</h1>
+
+    <% if flash[:alert] %>
+      <div class="result error"><%= flash[:alert] %></div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="result ok"><%= flash[:notice] %></div>
+    <% end %>
+
+    <%= form_tag login_path, method: :post do %>
+      <label for="email">Email</label>
+      <%= email_field_tag :email, nil, id: 'email', required: true, autocomplete: 'username' %>
+
+      <label for="password">Password</label>
+      <%= password_field_tag :password, nil, id: 'password', required: true, autocomplete: 'current-password' %>
+
+      <%= submit_tag 'Sign in', class: 'btn' %>
+    <% end %>
+  </div>
+
+</body>
+</html>

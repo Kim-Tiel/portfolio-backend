@@ -1,0 +1,23 @@
+<h2><%= @model_name.pluralize %></h2>
+<p class="small">Showing recent records for <strong><%= @model_name %></strong>. Click an item to view details.</p>
+<table style="width:100%;border-collapse:collapse;margin-top:12px">
+  <thead>
+    <tr style="text-align:left;border-bottom:1px solid #e6eefc">
+      <th style="padding:8px">ID</th>
+      <th style="padding:8px">Summary</th>
+      <th style="padding:8px">Created</th>
+      <th style="padding:8px">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |r| %>
+      <tr style="border-bottom:1px solid #f1f5fb">
+        <td style="padding:8px;vertical-align:top"><%= r.id %></td>
+        <td style="padding:8px;vertical-align:top;font-family:monospace"><%= (r.respond_to?(:title) && r.title.present?) ? r.title : (r.respond_to?(:name) && r.name.present?) ? r.name : r.to_s %></td>
+        <td style="padding:8px;vertical-align:top"><%= r.try(:created_at)&.strftime('%Y-%m-%d %H:%M') %></td>
+        <td style="padding:8px;vertical-align:top"><%= link_to 'View', admin_resource_item_path(params[:resource], r), class: 'secondary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p style="margin-top:12px"><%= link_to 'Back to dashboard', dashboard_path %></p>
