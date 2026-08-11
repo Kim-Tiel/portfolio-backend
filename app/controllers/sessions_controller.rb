@@ -12,8 +12,8 @@ class SessionsController < Web::BaseController
     admin = ::Admin.find_by(email: params[:email]&.downcase)
     if admin&.authenticate(params[:password])
       session[:admin_id] = admin.id
-      # set session expiry (epoch seconds) - 10 hours from now
-      session[:admin_expires_at] = 10.hours.from_now.to_i
+      # set session expiry (epoch seconds) using configured TTL
+      session[:admin_expires_at] = admin_session_ttl_hours.hours.from_now.to_i
       admin.update(last_login_at: Time.current)
       redirect_to dashboard_path, notice: 'Signed in successfully'
     else
