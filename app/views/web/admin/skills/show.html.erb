@@ -1,0 +1,29 @@
+<div class="actions-row" style="justify-content: space-between; align-items: center;">
+  <div>
+    <h2><%= @skill.name %></h2>
+    <p class="small"><%= @skill.category.titleize %> skill</p>
+  </div>
+  <div>
+    <%= link_to 'Edit', admin_edit_skill_path(@skill), class: 'secondary' %>
+    <%= link_to 'Back to skills', admin_skills_path, class: 'secondary' %>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <table style="width:100%;border-collapse:collapse">
+    <tbody>
+      <% [
+        ['Name', @skill.name],
+        ['Category', @skill.category.titleize],
+        ['Proficiency', @skill.proficiency],
+        ['Icon slug', @skill.icon_slug],
+        ['Sort order', @skill.sort_order]
+      ].each do |label, value| %>
+        <tr style="border-bottom:1px solid #f1f5fb">
+          <td style="padding:10px;width:180px;font-weight:600"><%= label %></td>
+          <td style="padding:10px"><%= value.present? ? value : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

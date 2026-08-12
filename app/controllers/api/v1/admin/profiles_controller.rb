@@ -18,11 +18,18 @@ module Api
         private
 
         def profile_params
-          params.require(:profile).permit(
-            :name, :title, :location, :timezone, :years_shipping,
-            :completed_projects, :countries_worked_in, :employer_satisfaction,
-            :avatar_url, :hero_tagline, available_for: []
+          permitted = params.require(:profile).permit(
+            :name, :title, :location, :timezone, :years_career_experience,
+            :completed_projects, :employer_satisfaction,
+            :avatar_url, :hero_tagline, :available_for, available_for: []
           )
+
+          available_for_value = params.dig(:profile, :available_for)
+          if available_for_value.is_a?(String)
+            permitted[:available_for] = available_for_value.to_s.split(',').map(&:strip).reject(&:blank?)
+          end
+
+          permitted
         end
       end
     end

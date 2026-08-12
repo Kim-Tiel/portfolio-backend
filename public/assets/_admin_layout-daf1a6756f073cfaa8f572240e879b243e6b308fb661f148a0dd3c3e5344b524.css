@@ -1,0 +1,246 @@
+/* line 2, app/assets/stylesheets/_admin_layout.scss */
+.site-header {
+  background: linear-gradient(90deg, var(--accent) 0%, #4f7cff 100%);
+  color: #fff;
+  padding: 14px 0;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+/* line 12, app/assets/stylesheets/_admin_layout.scss */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* line 22, app/assets/stylesheets/_admin_layout.scss */
+.brand {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+/* line 24, app/assets/stylesheets/_admin_layout.scss */
+.btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* line 25, app/assets/stylesheets/_admin_layout.scss */
+.btn.logout {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  padding: 8px 14px;
+}
+
+/* line 27, app/assets/stylesheets/_admin_layout.scss */
+.container {
+  max-width: 1200px;
+  margin: 18px auto;
+  padding: 0 18px;
+}
+
+/* layout */
+/* line 30, app/assets/stylesheets/_admin_layout.scss */
+.main-content {
+  padding-left: 260px;
+}
+
+/* line 31, app/assets/stylesheets/_admin_layout.scss */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* line 32, app/assets/stylesheets/_admin_layout.scss */
+.card {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* line 34, app/assets/stylesheets/_admin_layout.scss */
+.hero h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+/* line 35, app/assets/stylesheets/_admin_layout.scss */
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* line 36, app/assets/stylesheets/_admin_layout.scss */
+.small {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* line 37, app/assets/stylesheets/_admin_layout.scss */
+.section-title {
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+/* line 38, app/assets/stylesheets/_admin_layout.scss */
+.login-info {
+  margin-top: 12px;
+}
+
+/* line 40, app/assets/stylesheets/_admin_layout.scss */
+.actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* line 41, app/assets/stylesheets/_admin_layout.scss */
+.action-card {
+  width: 220px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* line 42, app/assets/stylesheets/_admin_layout.scss */
+.primary {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* line 44, app/assets/stylesheets/_admin_layout.scss */
+.side-panel .small {
+  color: var(--muted);
+}
+
+/* line 45, app/assets/stylesheets/_admin_layout.scss */
+.server-note pre {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 13px;
+}
+
+/* sidebar */
+/* line 48, app/assets/stylesheets/_admin_layout.scss */
+.side-menu {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  width: 240px;
+  background: #fff;
+  padding: 18px 12px;
+  box-shadow: 2px 0 20px rgba(2, 6, 23, 0.04);
+  transform: translateX(0);
+  transition: transform .22s ease;
+  z-index: 80;
+}
+
+/* line 52, app/assets/stylesheets/_admin_layout.scss */
+.menu-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+/* line 53, app/assets/stylesheets/_admin_layout.scss */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 54, app/assets/stylesheets/_admin_layout.scss */
+.menu-list li {
+  margin-bottom: 8px;
+}
+
+/* line 55, app/assets/stylesheets/_admin_layout.scss */
+.menu-link {
+  display: block;
+  padding: 8px 10px;
+  color: var(--accent-600);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+/* line 56, app/assets/stylesheets/_admin_layout.scss */
+.menu-link:hover {
+  background: #f3f8ff;
+}
+
+/* burger button */
+/* line 59, app/assets/stylesheets/_admin_layout.scss */
+.burger {
+  display: none;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 880px) {
+  /* line 62, app/assets/stylesheets/_admin_layout.scss */
+  .side-menu {
+    transform: translateX(-280px);
+  }
+  /* line 63, app/assets/stylesheets/_admin_layout.scss */
+  .side-menu.open {
+    transform: translateX(0);
+  }
+  /* line 64, app/assets/stylesheets/_admin_layout.scss */
+  .burger {
+    display: inline-block;
+  }
+  /* line 65, app/assets/stylesheets/_admin_layout.scss */
+  .main-content {
+    padding-left: 18px;
+  }
+  /* line 66, app/assets/stylesheets/_admin_layout.scss */
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  /* line 67, app/assets/stylesheets/_admin_layout.scss */
+  .header-inner {
+    padding: 0 12px;
+  }
+  /* line 68, app/assets/stylesheets/_admin_layout.scss */
+  .site-header {
+    padding: 10px 0;
+  }
+}
+
+/* tiny helpers */
+/* line 72, app/assets/stylesheets/_admin_layout.scss */
+.mt {
+  margin-top: 12px;
+}

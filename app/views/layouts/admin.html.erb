@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <title><%= content_for?(:title) ? yield(:title) : "Admin — Portfolio API" %></title>
+  <%= stylesheet_link_tag 'admin', media: 'all' %>
+</head>
+<body>
+  <%= render 'shared/admin_header' %>
+  <%= render 'shared/admin_sidebar' %>
+
+  <div class="container main-content">
+    <% if flash.present? %>
+      <div class="card flash-card" style="margin-bottom:12px">
+        <% flash.each do |k, v| %>
+          <div class="small" style="color: <%= k == 'alert' ? '#b91c1c' : '#064e3b' %>"><strong><%= v %></strong></div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+
+  <%= javascript_include_tag 'admin' %>
+</body>
+</html>

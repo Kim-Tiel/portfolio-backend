@@ -1,0 +1,119 @@
+<%= form_with model: [:admin, @project], local: true do |f| %>
+  <% if @project.errors.any? %>
+    <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:16px">
+      <p style="color:#7f1d1d;font-weight:700">Please fix the following errors:</p>
+      <ul>
+        <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'input', required: true %>
+    </div>
+
+    <div>
+      <%= f.label :slug %>
+      <%= f.text_field :slug, class: 'input', required: true %>
+    </div>
+
+    <div>
+      <%= f.label :client_type %>
+      <%= f.text_field :client_type, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :status %>
+      <%= f.select :status, Project.statuses.keys.map { |s| [s.titleize, s] }, {}, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :is_featured %>
+      <div style="margin-top:8px">
+        <%= f.check_box :is_featured %>
+        <%= f.label :is_featured, 'Featured project' %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :started_on %>
+      <%= f.date_field :started_on, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :completed_on %>
+      <%= f.date_field :completed_on, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :sort_order %>
+      <%= f.number_field :sort_order, class: 'input', min: 0 %>
+    </div>
+
+    <div>
+      <%= f.label :site_url %>
+      <%= f.url_field :site_url, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :repo_url %>
+      <%= f.url_field :repo_url, class: 'input' %>
+    </div>
+
+    <div style="grid-column:1 / -1">
+      <%= f.label :image_url %>
+      <%= f.url_field :image_url, class: 'input' %>
+    </div>
+
+    <div style="grid-column:1 / -1">
+      <%= f.label :summary %>
+      <%= f.text_area :summary, class: 'input', rows: 4, required: true %>
+    </div>
+
+    <div style="grid-column:1 / -1">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'input', rows: 5 %>
+    </div>
+  </div>
+
+  <% if @project.project_metrics.any? %>
+    <div class="card" style="margin-top:18px">
+      <h3>Project metrics</h3>
+      <% f.fields_for :project_metrics do |metric_fields| %>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:end;margin-top:12px">
+          <div>
+            <%= metric_fields.label :label %>
+            <%= metric_fields.text_field :label, class: 'input' %>
+          </div>
+          <div>
+            <%= metric_fields.label :value %>
+            <%= metric_fields.text_field :value, class: 'input' %>
+          </div>
+          <div>
+            <%= metric_fields.label :sort_order %>
+            <%= metric_fields.number_field :sort_order, class: 'input', min: 0 %>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <%= metric_fields.label :_destroy, 'Remove' %>
+            <%= metric_fields.check_box :_destroy %>
+          </div>
+        </div>
+      <% end %>
+      <p class="small" style="margin-top:12px">Leave blank metric rows untouched.</p>
+    </div>
+  <% end %>
+
+  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <%= f.submit(@project.persisted? ? 'Save project' : 'Create project', class: 'primary') %>
+    <%= link_to 'Cancel', @project.persisted? ? admin_project_path(@project) : admin_projects_path, class: 'secondary' %>
+  </div>
+<% end %>

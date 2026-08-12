@@ -1,4 +1,5 @@
 require_relative "boot"
+require "logger"
 
 require "rails"
 # Pick the frameworks you want:
@@ -12,7 +13,7 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-# require "sprockets/railtie"
+require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -46,5 +47,9 @@ module PortfolioApi
     config.middleware.use ActionDispatch::Flash
     # Support method override (allows forms to submit DELETE/PUT via _method param)
     config.middleware.use Rack::MethodOverride
+
+    # Enable the asset pipeline for the admin UI in this API-only application.
+    config.assets.enabled = true
+    config.assets.paths << Rails.root.join('app', 'assets')
   end
 end

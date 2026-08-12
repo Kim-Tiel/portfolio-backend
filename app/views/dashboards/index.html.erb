@@ -1,56 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin Dashboard</title>
-  <%= render 'shared/admin_styles' %>
-</head>
-<body>
-  <%= render 'shared/admin_header' %>
+<div class="grid">
+  <section class="card">
+    <h2>Welcome to the CMS</h2>
+    <p class="muted">Use the left menu to manage content. This interface is a lightweight CMS admin for your portfolio backend.</p>
 
-  <%= render 'shared/admin_sidebar' %>
+    <p style="margin-top:16px" class="muted">Signed in as <strong><%= current_admin&.email || 'Unknown' %></strong></p>
 
-  <main class="container main-content">
-    <div class="grid">
-      <section class="card">
-        <h2>Welcome to the CMS</h2>
-        <p class="muted">Use the left menu to manage content. This interface is a lightweight CMS admin for your portfolio backend.</p>
+    <h3 style="margin-top:18px">Quick actions</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+      <div style="flex:1 1 200px;min-width:180px" class="card">
+        <h4 style="margin:0 0 6px">Create Project</h4>
+        <div class="small">Add a new portfolio project from the API or future CMS form.</div>
+        <div style="margin-top:10px"><a class="primary" href="<%= admin_new_project_path %>">Create</a></div>
+      </div>
 
-        <p style="margin-top:16px" class="muted">Signed in as <strong><%= current_admin&.email || 'Unknown' %></strong></p>
-
-        <h3 style="margin-top:18px">Quick actions</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
-          <div style="flex:1 1 200px;min-width:180px" class="card">
-            <h4 style="margin:0 0 6px">Create Project</h4>
-            <div class="small">Add a new portfolio project from the API or future CMS form.</div>
-            <div style="margin-top:10px"><a class="primary" href="<%= admin_resource_path('projects') %>">Open</a></div>
-          </div>
-
-          <div style="flex:1 1 200px;min-width:180px" class="card">
-            <h4 style="margin:0 0 6px">View Contact Messages</h4>
-            <div class="small">Check messages sent from the site contact form.</div>
-            <div style="margin-top:10px"><a class="primary" href="<%= admin_resource_path('contact_messages') %>">Open</a></div>
-          </div>
-        </div>
-
-        <div id="actionResult" style="margin-top:14px"><pre id="resultPre">Server session login active</pre></div>
-      </section>
-
-      <aside class="card">
-        <h4>Tips</h4>
-        <ul class="small">
-          <li>Keep your token private — this page stores it in localStorage for convenience.</li>
-          <li>Use the <strong>Copy Authorization header</strong> to paste into API clients ("Authorization: Bearer &lt;token&gt;").</li>
-          <li>Logout clears the stored token and returns to the login page.</li>
-        </ul>
-
-        <h4 style="margin-top:12px">Mobile friendly</h4>
-        <p class="small">Layout collapses to a single column on small screens. Buttons are large enough for touch.</p>
-      </aside>
+      <div style="flex:1 1 200px;min-width:180px" class="card">
+        <h4 style="margin:0 0 6px">View Contact Messages</h4>
+        <div class="small">Check messages sent from the site contact form.</div>
+        <div style="margin-top:10px"><a class="primary" href="<%= admin_resource_path('contact_messages') %>">Open</a></div>
+      </div>
     </div>
-  </main>
 
+    <div id="actionResult" style="margin-top:14px"><pre id="resultPre">Server session login active</pre></div>
+  </section>
 
-</body>
-</html>
+  <aside class="card">
+    <h4>Tips</h4>
+    <ul class="small">
+      <li>Keep your token private — this page stores it in localStorage for convenience.</li>
+      <li>Use the <strong>Copy Authorization header</strong> to paste into API clients ("Authorization: ******;token&gt;").</li>
+      <li>Logout clears the stored token and returns to the login page.</li>
+    </ul>
+
+    <h4 style="margin-top:12px">Mobile friendly</h4>
+    <p class="small">Layout collapses to a single column on small screens. Buttons are large enough for touch.</p>
+  </aside>
+</div>

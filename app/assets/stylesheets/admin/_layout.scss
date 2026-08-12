@@ -1,0 +1,50 @@
+// Core admin layout and shared components
+.container { max-width: 1200px; margin: 18px auto; padding: 0 18px }
+
+/* layout */
+.main-content { padding-left: 260px; }
+.grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start }
+.card { background: var(--card); padding: 18px; border-radius: 12px; box-shadow: var(--shadow) }
+
+.hero h2 { margin: 0 0 8px; font-size: 22px }
+.muted { color: var(--muted); font-size: 14px; line-height: 1.5 }
+.small { font-size: 13px; color: var(--muted); line-height: 1.4 }
+.section-title { margin-top: 18px; margin-bottom: 8px }
+.login-info { margin-top: 12px }
+
+.actions-row { display:flex;flex-wrap:wrap; gap:12px; margin-top:10px }
+.action-card { width: 220px; padding: 14px; display:flex; flex-direction:column; gap:8px }
+.primary { display:inline-block; background: var(--accent); color:#fff; padding: 8px 12px; border-radius: 8px; text-decoration:none; font-weight:600 }
+.secondary { display:inline-block; background: #f3f4f6; color: #111827; padding: 8px 12px; border-radius: 8px; text-decoration: none; border: 1px solid #d1d5db }
+.danger { display:inline-block; background: #ef4444; color: #fff; padding: 8px 12px; border-radius: 8px; border: none; text-decoration: none; cursor: pointer }
+ 
+.side-panel .small { color: var(--muted) }
+.server-note pre { margin:0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; font-size:13px }
+
+/* tiny helpers */
+.mt { margin-top: 12px }
+
+@media (max-width: 880px) {
+  .main-content { padding-left: 18px }
+  .grid { grid-template-columns: 1fr }
+}
+
+.flash-card {
+  transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease, padding 0.4s ease;
+}
+
+.flash-hidden {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}

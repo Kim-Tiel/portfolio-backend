@@ -1,6 +1,7 @@
 module Web
   module Admin
     class ResourcesController < Web::BaseController
+      layout 'admin'
       before_action :authenticate_admin!
       ALLOWED_MODELS = %w[Admin Skill Project Experience Education ContactMessage MemoryLogEntry Profile]
 

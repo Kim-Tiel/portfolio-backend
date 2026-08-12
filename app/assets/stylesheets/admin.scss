@@ -1,0 +1,11 @@
+// Admin stylesheet manifest — imports partials per Rails asset pipeline best practices
+@import "admin/variables";
+@import "admin/layout";
+
+// components
+@import "admin/components/header";
+@import "admin/components/sidebar";
+@import "admin/components/forms";
+
+// pages
+@import "admin/pages/profile";

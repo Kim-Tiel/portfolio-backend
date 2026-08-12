@@ -1,5 +1,5 @@
-<script>
-(function(){
+// Menu/burger behaviour
+document.addEventListener('DOMContentLoaded', function(){
   const burger = document.getElementById('burgerToggle')
   const side = document.getElementById('sideMenu')
   if(!burger || !side) return
@@ -30,6 +30,4 @@
       side.setAttribute('aria-hidden', 'true')
     }
   })
-
-})();
-</script>
+});

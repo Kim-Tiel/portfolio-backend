@@ -1,0 +1,31 @@
+<h2>Memory log entries</h2>
+<p class="small">Short messages submitted by visitors; approve to publish.</p>
+
+<table style="width:100%;border-collapse:collapse;margin-top:12px">
+  <thead>
+    <tr style="text-align:left;border-bottom:1px solid #e6eefc">
+      <th style="padding:8px">Name</th>
+      <th style="padding:8px">Message</th>
+      <th style="padding:8px">Received</th>
+      <th style="padding:8px">Status</th>
+      <th style="padding:8px">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |e| %>
+      <tr style="border-bottom:1px solid #f1f5fb">
+        <td style="padding:8px;vertical-align:top"><%= e.display_name %></td>
+        <td style="padding:8px;vertical-align:top"><%= e.message %></td>
+        <td style="padding:8px;vertical-align:top"><%= e.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+        <td style="padding:8px;vertical-align:top"><%= e.is_approved ? 'Approved' : 'Pending' %></td>
+        <td style="padding:8px;vertical-align:top">
+          <%= link_to 'View', admin_memory_log_entry_path(e), class: 'secondary' %>
+          <% unless e.is_approved %>
+            <%= button_to 'Approve', approve_admin_memory_log_entry_path(e), method: :post, class: 'primary', form: { style: 'display:inline' } %>
+          <% end %>
+          <%= button_to 'Delete', admin_memory_log_entry_path(e), method: :delete, data: { confirm: 'Remove?' }, class: 'danger', form: { style: 'display:inline' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

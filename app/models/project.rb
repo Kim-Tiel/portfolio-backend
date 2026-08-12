@@ -5,7 +5,8 @@ class Project < ApplicationRecord
   has_many :skills, through: :project_skills
 
   has_many :project_metrics, -> { order(sort_order: :asc) }, dependent: :destroy
-  accepts_nested_attributes_for :project_metrics, allow_destroy: true
+  accepts_nested_attributes_for :project_metrics, allow_destroy: true,
+                                        reject_if: proc { |attrs| attrs['label'].blank? && attrs['value'].blank? }
 
   validates :slug, presence: true, uniqueness: true,
                    format: { with: /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/, message: 'must be lowercase, hyphen-separated' }

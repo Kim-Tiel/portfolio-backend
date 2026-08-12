@@ -1,0 +1,7 @@
+/* Small form helpers for admin forms */
+.input { width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e6e9ef; background:#fff }
+label { display:block; margin-bottom:6px; font-weight:600 }
+
+@media (max-width:880px){
+  .input { font-size:14px }
+}

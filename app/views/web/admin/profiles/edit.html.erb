@@ -1,106 +1,77 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Edit Profile — Admin</title>
-  <%= render 'shared/admin_styles' %>
-</head>
-<body>
-  <%= render 'shared/admin_header' %>
+<div class="profile-grid">
+  <section class="card hero">
+    <h2>Edit Profile</h2>
 
-  <%= render 'shared/admin_sidebar' %>
+    <%= form_with model: @profile, url: admin_profile_path, method: :patch, local: true do |f| %>
+      <% if @profile.errors.any? %>
+        <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:12px">
+          <p style="color:#7f1d1d;font-weight:700">Please fix the following errors:</p>
+          <ul>
+            <% @profile.errors.full_messages.each do |m| %>
+              <li><%= m %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <main class="container main-content">
-    <div class="grid">
-      <section class="card hero">
-        <h2>Edit Profile</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'input', required: true %>
+        </div>
 
-        <%= form_with model: @profile, url: admin_profile_path, method: :patch, local: true do |f| %>
-          <% if @profile.errors.any? %>
-            <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:12px">
-              <p style="color:#7f1d1d;font-weight:700">Please fix the following errors:</p>
-              <ul>
-                <% @profile.errors.full_messages.each do |m| %>
-                  <li><%= m %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'input', required: true %>
+        </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div>
-              <%= f.label :name %>
-              <%= f.text_field :name, class: 'input', required: true %>
-            </div>
+        <div>
+          <%= f.label :location %>
+          <%= f.text_field :location, class: 'input' %>
+        </div>
 
-            <div>
-              <%= f.label :title %>
-              <%= f.text_field :title, class: 'input', required: true %>
-            </div>
+        <div>
+          <%= f.label :timezone %>
+          <%= f.text_field :timezone, class: 'input' %>
+        </div>
 
-            <div>
-              <%= f.label :location %>
-              <%= f.text_field :location, class: 'input' %>
-            </div>
+        <div>
+          <%= f.label :years_career_experience, 'Years experience' %>
+          <%= f.number_field :years_career_experience, class: 'input', min: 0 %>
+        </div>
 
-            <div>
-              <%= f.label :timezone %>
-              <%= f.text_field :timezone, class: 'input' %>
-            </div>
+        <div>
+          <%= f.label :completed_projects %>
+          <%= f.number_field :completed_projects, class: 'input', min: 0 %>
+        </div>
 
-            <div>
-              <%= f.label :years_shipping, 'Years shipping' %>
-              <%= f.number_field :years_shipping, class: 'input', min: 0 %>
-            </div>
+        <div>
+          <%= f.label :employer_satisfaction %>
+          <%= f.number_field :employer_satisfaction, class: 'input', step: '0.01', min: 0, max: 100 %>
+        </div>
 
-            <div>
-              <%= f.label :completed_projects %>
-              <%= f.number_field :completed_projects, class: 'input', min: 0 %>
-            </div>
+        <div style="grid-column:1 / -1">
+          <%= f.label :available_for, 'Available for (comma separated)' %>
+          <%= f.text_field :available_for, value: (@profile.available_for || []).join(', '), class: 'input' %>
+          <p class="small">Enter multiple values separated by commas (e.g. "Freelance, Contract, Mentoring").</p>
+        </div>
 
-            <div>
-              <%= f.label :countries_worked_in %>
-              <%= f.number_field :countries_worked_in, class: 'input', min: 0 %>
-            </div>
+        <div style="grid-column:1 / -1">
+          <%= f.label :hero_tagline, 'Hero tagline' %>
+          <%= f.text_area :hero_tagline, class: 'input', rows: 4 %>
+        </div>
 
-            <div>
-              <%= f.label :employer_satisfaction %>
-              <%= f.number_field :employer_satisfaction, class: 'input', step: '0.01', min: 0, max: 100 %>
-            </div>
+        <div style="grid-column:1 / -1">
+          <%= f.label :avatar_url %>
+          <%= f.text_field :avatar_url, class: 'input' %>
+        </div>
+      </div>
 
-            <div style="grid-column:1 / -1">
-              <%= f.label :available_for, 'Available for (comma separated)' %>
-              <%= f.text_field :available_for, value: (@profile.available_for || []).join(', '), class: 'input' %>
-              <p class="small">Enter multiple values separated by commas (e.g. "Freelance, Contract, Mentoring").</p>
-            </div>
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <%= f.submit 'Save profile', class: 'primary' %>
+        <%= link_to 'Cancel', admin_profile_path, class: 'secondary' %>
+      </div>
+    <% end %>
 
-            <div style="grid-column:1 / -1">
-              <%= f.label :hero_tagline, 'Hero tagline' %>
-              <%= f.text_area :hero_tagline, class: 'input', rows: 4 %>
-            </div>
-
-            <div style="grid-column:1 / -1">
-              <%= f.label :avatar_url %>
-              <%= f.text_field :avatar_url, class: 'input' %>
-            </div>
-          </div>
-
-          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-            <%= f.submit 'Save profile', class: 'primary' %>
-            <%= link_to 'Cancel', admin_profile_path, class: 'secondary' %>
-          </div>
-        <% end %>
-
-      </section>
-
-      <aside class="card side-panel">
-        <h4>Summary</h4>
-        <p class="small">Editing profile record.</p>
-      </aside>
-    </div>
-  </main>
-
-  <%= render 'shared/admin_scripts' %>
-</body>
-</html>
+  </section>
+</div>

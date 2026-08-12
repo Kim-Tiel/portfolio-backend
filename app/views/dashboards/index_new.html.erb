@@ -1,26 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin Dashboard</title>
-  <%= render 'shared/admin_styles' %>
-</head>
-<body>
-  <%= render 'shared/admin_header' %>
-
-  <%= render 'shared/admin_sidebar' %>
-
-  <main class="container main-content">
-    <div class="grid">
-      <section class="card hero">
-        <h2>Welcome to the CMS</h2>
-        <p class="muted login-info">Signed in as <strong><%= current_admin&.email || 'Unknown' %></strong></p>
-      </section>
-    </div>
-  </main>
-
-  <%= render 'shared/admin_scripts' %>
-
-</body>
-</html>
+<div class="grid">
+  <section class="card hero">
+    <h2>Welcome to the CMS</h2>
+    <p class="muted login-info">Signed in as <strong><%= current_admin&.email || 'Unknown' %></strong></p>
+  </section>
+</div>

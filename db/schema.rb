@@ -118,9 +118,8 @@ ActiveRecord::Schema.define(version: 2026_08_11_092904) do
     t.string "title", null: false
     t.string "location"
     t.string "timezone"
-    t.integer "years_shipping"
+    t.integer "years_career_experience"
     t.integer "completed_projects"
-    t.integer "countries_worked_in"
     t.decimal "employer_satisfaction", precision: 5, scale: 2
     t.text "available_for", default: [], array: true
     t.string "avatar_url"

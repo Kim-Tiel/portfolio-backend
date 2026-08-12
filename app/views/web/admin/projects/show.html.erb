@@ -1,0 +1,59 @@
+<div class="actions-row" style="justify-content: space-between; align-items: center;">
+  <div>
+    <h2><%= @project.title %></h2>
+    <p class="small"><%= @project.client_type.presence || 'Portfolio project' %></p>
+  </div>
+  <div>
+    <%= link_to 'Edit', admin_edit_project_path(@project), class: 'secondary' %>
+    <%= link_to 'Back to projects', admin_projects_path, class: 'secondary' %>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <table style="width:100%;border-collapse:collapse">
+    <tbody>
+      <% [
+        ['Slug', @project.slug],
+        ['Client type', @project.client_type],
+        ['Location', @project.location],
+        ['Status', @project.status.titleize],
+        ['Featured', @project.is_featured ? 'Yes' : 'No'],
+        ['Start date', @project.started_on],
+        ['Completed date', @project.completed_on],
+        ['Site URL', @project.site_url],
+        ['Repo URL', @project.repo_url],
+        ['Image URL', @project.image_url],
+        ['Sort order', @project.sort_order],
+        ['Summary', @project.summary],
+        ['Description', @project.description]
+      ].each do |label, value| %>
+        <tr style="border-bottom:1px solid #f1f5fb">
+          <td style="padding:10px;width:180px;font-weight:600"><%= label %></td>
+          <td style="padding:10px"><%= value.present? ? value : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @project.project_metrics.any? %>
+  <div class="card" style="margin-top:16px">
+    <h3>Metrics</h3>
+    <table style="width:100%;border-collapse:collapse;margin-top:8px">
+      <thead>
+        <tr style="text-align:left;border-bottom:1px solid #e6eefc">
+          <th style="padding:10px">Label</th>
+          <th style="padding:10px">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.project_metrics.each do |metric| %>
+          <tr style="border-bottom:1px solid #f1f5fb">
+            <td style="padding:10px"><%= metric.label %></td>
+            <td style="padding:10px"><%= metric.value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

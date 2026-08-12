@@ -5,9 +5,8 @@ class CreateProfiles < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.string :location
       t.string :timezone
-      t.integer :years_shipping
+      t.integer :years_career_experience
       t.integer :completed_projects
-      t.integer :countries_worked_in
       t.decimal :employer_satisfaction, precision: 5, scale: 2
       t.text :available_for, array: true, default: []
       t.string :avatar_url
