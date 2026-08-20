@@ -1,0 +1,77 @@
+<div class="profile-grid">
+  <section class="card hero">
+    <h2>Edit Profile</h2>
+
+    <%= form_with model: @profile, url: admin_profile_path, method: :patch, local: true do |f| %>
+      <% if @profile.errors.any? %>
+        <div class="card form-errors">
+          <p>Please fix the following errors:</p>
+          <ul>
+            <% @profile.errors.full_messages.each do |m| %>
+              <li><%= m %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-grid">
+        <div>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'input', required: true %>
+        </div>
+
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'input', required: true %>
+        </div>
+
+        <div>
+          <%= f.label :location %>
+          <%= f.text_field :location, class: 'input' %>
+        </div>
+
+        <div>
+          <%= f.label :timezone %>
+          <%= f.text_field :timezone, class: 'input' %>
+        </div>
+
+        <div>
+          <%= f.label :years_career_experience, 'Years experience' %>
+          <%= f.number_field :years_career_experience, class: 'input', min: 0 %>
+        </div>
+
+        <div>
+          <%= f.label :completed_projects %>
+          <%= f.number_field :completed_projects, class: 'input', min: 0 %>
+        </div>
+
+        <div>
+          <%= f.label :employer_satisfaction %>
+          <%= f.number_field :employer_satisfaction, class: 'input', step: '0.01', min: 0, max: 100 %>
+        </div>
+
+        <div class="full">
+          <%= f.label :available_for, 'Available for (comma separated)' %>
+          <%= f.text_field :available_for, value: (@profile.available_for || []).join(', '), class: 'input' %>
+          <p class="small">Enter multiple values separated by commas (e.g. "Freelance, Contract, Mentoring").</p>
+        </div>
+
+        <div class="full">
+          <%= f.label :hero_tagline, 'Hero tagline' %>
+          <%= f.text_area :hero_tagline, class: 'input', rows: 4 %>
+        </div>
+
+        <div class="full">
+          <%= f.label :avatar_url %>
+          <%= f.text_field :avatar_url, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit 'Save profile', class: 'primary' %>
+        <%= link_to 'Cancel', admin_profile_path, class: 'secondary' %>
+      </div>
+    <% end %>
+
+  </section>
+</div>

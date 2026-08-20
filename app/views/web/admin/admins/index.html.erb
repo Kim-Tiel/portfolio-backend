@@ -1,0 +1,31 @@
+<h2>Admins</h2>
+<p class="small">Admin accounts with access to this dashboard.</p>
+
+<% if @admins.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Last login</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admins.each do |admin| %>
+        <tr>
+          <td><%= admin.email %></td>
+          <td class="meta"><%= admin.last_login_at&.strftime('%Y-%m-%d %H:%M') || 'Never' %></td>
+          <td class="meta"><%= admin.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td class="actions">
+            <%= link_to 'View', admin_admin_path(admin), class: 'secondary' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No admins yet.</p>
+  </div>
+<% end %>

@@ -1,0 +1,54 @@
+<div class="actions-row">
+  <div>
+    <h2><%= @education.institution %></h2>
+    <p class="small"><%= @education.degree %></p>
+  </div>
+  <div>
+    <%= link_to 'Edit', admin_edit_education_path(@education), class: 'secondary' %>
+    <%= link_to 'Back to education', admin_educations_path, class: 'secondary' %>
+  </div>
+</div>
+
+<div class="card mt">
+  <table class="table detail-table">
+    <tbody>
+      <% [
+        ['Institution', @education.institution],
+        ['Degree', @education.degree],
+        ['Field', @education.field],
+        ['Location', @education.location],
+        ['Start date', @education.start_date],
+        ['End date', @education.end_date],
+        ['Graduated', @education.is_graduated ? 'Yes' : 'No'],
+        ['Sort order', @education.sort_order]
+      ].each do |label, value| %>
+        <tr>
+          <td><%= label %></td>
+          <td><%= value.present? ? value : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @education.education_milestones.any? %>
+  <div class="card mt">
+    <h3>Milestones</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @education.education_milestones.each do |milestone| %>
+          <tr>
+            <td><%= milestone.description %></td>
+            <td class="meta"><%= milestone.occurred_on %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

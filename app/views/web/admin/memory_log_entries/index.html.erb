@@ -1,0 +1,37 @@
+<h2>Memory log entries</h2>
+<p class="small">Short messages submitted by visitors; approve to publish.</p>
+
+<% if @entries.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Message</th>
+        <th>Received</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @entries.each do |e| %>
+        <tr>
+          <td><%= e.display_name %></td>
+          <td><%= e.message %></td>
+          <td class="meta"><%= e.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td><span class="badge <%= e.is_approved ? 'badge-ok' : '' %>"><%= e.is_approved ? 'Approved' : 'Pending' %></span></td>
+          <td class="actions">
+            <%= link_to 'View', admin_memory_log_entry_path(e), class: 'secondary' %>
+            <% unless e.is_approved %>
+              <%= button_to 'Approve', approve_admin_memory_log_entry_path(e), method: :post, class: 'primary', form: { style: 'display:inline' } %>
+            <% end %>
+            <%= button_to 'Delete', admin_memory_log_entry_path(e), method: :delete, data: { confirm: 'Remove?' }, class: 'danger', form: { style: 'display:inline' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No memory log entries yet.</p>
+  </div>
+<% end %>

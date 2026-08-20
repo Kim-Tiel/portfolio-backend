@@ -1,0 +1,32 @@
+<h2>Contact messages</h2>
+<p class="small">Messages submitted through the site contact form.</p>
+
+<% if @messages.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>From</th>
+        <th>Subject</th>
+        <th>Received</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @messages.each do |m| %>
+        <tr>
+          <td><%= m.name.presence || m.email %></td>
+          <td><%= m.subject.presence || m.body.truncate(60) %></td>
+          <td class="meta"><%= m.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td class="actions">
+            <%= link_to 'View', admin_contact_message_path(m), class: 'secondary' %>
+            <%= button_to 'Delete', admin_contact_message_path(m), method: :delete, data: { confirm: 'Remove this message?' }, class: 'danger', form: { style: 'display:inline' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No contact messages yet.</p>
+  </div>
+<% end %>

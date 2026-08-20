@@ -1,0 +1,40 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.2
+  Exclude:
+    - "db/schema.rb"
+    - "bin/**/*"
+    - "vendor/**/*"
+
+# This codebase predates RuboCop adoption and consistently uses double-quoted
+# strings without frozen_string_literal comments or class doc comments.
+# Enforcing these here would mean rewriting hundreds of pre-existing lines
+# with no functional benefit, so they're off; new/changed code should still
+# follow the remaining (correctness-oriented) cops.
+Style/StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+# Pre-existing code shape; not correctness issues.
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - "config/routes.rb"
+
+Layout/LineLength:
+  Max: 130

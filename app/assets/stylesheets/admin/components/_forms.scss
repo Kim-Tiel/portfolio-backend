@@ -1,0 +1,77 @@
+/* Form fields and error summaries. */
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+}
+.input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; text-transform: capitalize }
+
+.field { margin-bottom: 0 }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-grid .full { grid-column: 1 / -1 }
+
+.checkbox-field { margin-top: 8px; display: flex; align-items: center; gap: 6px }
+.checkbox-field label { display: inline; margin: 0; font-weight: 400 }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: end;
+  margin-top: 12px;
+}
+.metrics-remove { display: flex; flex-direction: column; gap: 6px }
+
+.highlight-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-top: 12px;
+}
+
+@media (max-width: 880px) {
+  .metrics-grid { grid-template-columns: 1fr 1fr }
+}
+
+.form-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.form-errors {
+  position: fixed;
+  top: 90px;
+  right: 16px;
+  z-index: 100;
+  max-width: 280px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger);
+  padding: 10px 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+.form-errors p { color: var(--danger); font-weight: 700; font-size: 12px; margin: 0 0 4px }
+.form-errors ul { margin: 0; padding-left: 18px; color: var(--danger); font-size: 12px }
+
+@media (max-width: 880px) {
+  .input { font-size: 14px }
+  .form-grid { grid-template-columns: 1fr }
+}

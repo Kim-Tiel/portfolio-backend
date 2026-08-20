@@ -1,0 +1,8 @@
+<h2>Message from <%= @message.name.presence || @message.email %></h2>
+<p class="small"><strong>Subject:</strong> <%= @message.subject.presence || '(no subject)' %></p>
+
+<div class="card mt">
+  <pre class="message-body"><%= @message.body %></pre>
+</div>
+
+<p class="mt"><%= link_to 'Back', admin_contact_messages_path, class: 'secondary' %></p>

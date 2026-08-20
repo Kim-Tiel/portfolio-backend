@@ -1,0 +1,16 @@
+<h2><%= @model_name %> — <span class="meta"><%= @record.id %></span></h2>
+
+<div class="card mt">
+  <table class="table detail-table">
+    <tbody>
+      <% @record.attributes.each do |k, v| %>
+        <tr>
+          <td><%= k %></td>
+          <td><%= v.present? ? v : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<p class="mt"><%= link_to 'Back to list', admin_resource_path(params[:resource]) %> · <%= link_to 'Dashboard', dashboard_path %></p>

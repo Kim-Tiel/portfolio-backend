@@ -1,0 +1,90 @@
+/* Header — top edge of the dark chrome frame, with the blue->purple
+   signature gradient rule that carries through into the card corner ticks. */
+.site-header {
+  background: var(--ink-2);
+  color: var(--text);
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+@media (min-width: 881px) {
+  .header-inner {
+    max-width: none;
+    margin: 0;
+    padding: 0 24px;
+  }
+}
+
+.header-inner .left,
+.header-inner .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.btn {
+  background: transparent;
+  border: 1px solid rgba(250, 250, 247, 0.3);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn.logout { background: rgba(250, 250, 247, 0.1); border-color: transparent; padding: 8px 14px }
+.burger {
+  display: none;
+  font-size: 18px;
+  background: rgba(250, 250, 247, 0.1);
+  border: none;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+@media (max-width: 880px) {
+  .header-inner { padding: 0 12px }
+  .site-header { padding: 10px 0 }
+  .burger { display: inline-flex; align-items: center; justify-content: center }
+  .brand-logo { width: 44px; height: 44px }
+}

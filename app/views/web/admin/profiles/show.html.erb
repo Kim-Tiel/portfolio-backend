@@ -1,0 +1,74 @@
+<div class="profile-grid">
+  <section class="card hero">
+    <div class="profile-hero">
+      <div class="avatar">
+        <% if @profile.avatar_url.present? %>
+          <img src="<%= @profile.avatar_url %>" alt="Avatar" />
+        <% else %>
+          <div class="avatar-initial"><%= @profile.name.to_s.first&.upcase || 'A' %></div>
+        <% end %>
+      </div>
+
+      <div class="hero-info">
+        <h1><%= @profile.name.presence || 'Your Name' %></h1>
+        <p class="lead"><%= @profile.title.presence || 'Your title' %> • <%= @profile.location.presence || 'Location' %></p>
+
+        <p class="mt muted"><%= simple_format(@profile.hero_tagline.to_s) %></p>
+
+        <div class="stats">
+          <div class="stat">
+            <h3><%= @profile.years_career_experience || 0 %>+</h3>
+            <p>Years experience</p>
+          </div>
+
+          <div class="stat">
+            <h3><%= @profile.completed_projects || 0 %></h3>
+            <p>Completed projects</p>
+          </div>
+
+          <div class="stat">
+            <h3><%= @profile.employer_satisfaction || 0 %>%</h3>
+            <p>Employer satisfaction</p>
+          </div>
+        </div>
+
+        <div class="mt">
+          <%= link_to 'Edit profile', edit_admin_profile_path, class: 'secondary' %>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="projects">
+      <h3 class="section-title">Employment Type</h3>
+      <div class="stack-grid">
+        <% (@profile.available_for || []).each do |s| %>
+          <div class="chip"><%= s %></div>
+        <% end %>
+        <%# Fallback sample chips %>
+        <% if (@profile.available_for || []).empty? %>
+          <div class="chip">Ruby on Rails</div>
+          <div class="chip">PostgreSQL</div>
+          <div class="chip">Vue.js</div>
+          <div class="chip">Docker</div>
+        <% end %>
+      </div>
+
+      <h3 class="section-title mt">Selected projects</h3>
+      <div class="cards-grid">
+        <div class="project-card">
+          <strong>Projects</strong>
+          <p class="small">Manage your portfolio projects from the projects admin.</p>
+          <p class="mt"><a class="primary" href="<%= admin_projects_path %>">Open Projects</a></p>
+        </div>
+
+        <div class="project-card">
+          <strong>Contact messages</strong>
+          <p class="small">View messages from site visitors.</p>
+          <p class="mt"><a class="primary" href="<%= admin_resource_path('contact_messages') %>">Open Messages</a></p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>

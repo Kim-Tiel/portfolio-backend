@@ -1,0 +1,39 @@
+<div class="actions-row">
+  <div>
+    <h2>Education</h2>
+    <p class="small">Manage education entries and milestones.</p>
+  </div>
+  <div>
+    <%= link_to 'New education', admin_new_education_path, class: 'primary' %>
+  </div>
+</div>
+
+<% if @educations.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Institution</th>
+        <th>Degree</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @educations.each do |education| %>
+        <tr>
+          <td><%= education.institution %></td>
+          <td><%= education.degree %></td>
+          <td class="actions">
+            <%= link_to 'View', admin_education_path(education), class: 'secondary' %>
+            <%= link_to 'Edit', admin_edit_education_path(education), class: 'secondary' %>
+            <%= button_to 'Delete', admin_education_path(education), method: :delete, data: { confirm: 'Remove this education entry?' }, class: 'danger', form: { style: 'display:inline' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No education entries yet.</p>
+    <%= link_to 'Add your first entry', admin_new_education_path, class: 'primary' %>
+  </div>
+<% end %>

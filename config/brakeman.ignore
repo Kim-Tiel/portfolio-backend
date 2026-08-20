@@ -1,0 +1,30 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "0b5a436a97ca71d04a7a2faacb41b31f036eb0f0882836da8cdb50f83bbe320c",
+      "note": "Pre-existing: skill_ids/nested attrs mass-assignment on Experience. Tracked for follow-up, not introduced by this change.",
+      "warning_type": "Mass Assignment",
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/"
+    },
+    {
+      "fingerprint": "3ac89621cf5883e9ebcc5b04a0ff91090ce5e5173a4b078512ca2805cacdb25d",
+      "note": "Pre-existing: skill_ids/nested attrs mass-assignment on Experience. Tracked for follow-up, not introduced by this change.",
+      "warning_type": "Mass Assignment",
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/"
+    },
+    {
+      "fingerprint": "d84924377155b41e094acae7404ec2e521629d86f97b0ff628e3d1b263f8101c",
+      "note": "Pre-existing: Rails 6.1 is past EOL. Tracked as a follow-up upgrade, out of scope for this change.",
+      "warning_type": "Unmaintained Dependency",
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/"
+    },
+    {
+      "fingerprint": "edf687f759ec9765bd5db185dbc615c80af77d6e7e19386fc42934e7a80307af",
+      "note": "Pre-existing: Ruby 3.2 is past EOL. Tracked as a follow-up upgrade, out of scope for this change.",
+      "warning_type": "Unmaintained Dependency",
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/"
+    }
+  ],
+  "updated": "2026-08-19 00:00:00 -0000",
+  "brakeman_version": "8.0.6"
+}

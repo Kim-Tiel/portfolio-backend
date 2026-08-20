@@ -1,0 +1,59 @@
+<div class="actions-row">
+  <div>
+    <h2><%= @project.title %></h2>
+    <p class="small"><%= @project.client_type.presence || 'Portfolio project' %></p>
+  </div>
+  <div>
+    <%= link_to 'Edit', admin_edit_project_path(@project), class: 'secondary' %>
+    <%= link_to 'Back to projects', admin_projects_path, class: 'secondary' %>
+  </div>
+</div>
+
+<div class="card mt">
+  <table class="table detail-table">
+    <tbody>
+      <% [
+        ['Slug', @project.slug],
+        ['Client type', @project.client_type],
+        ['Location', @project.location],
+        ['Status', @project.status.titleize],
+        ['Featured', @project.is_featured ? 'Yes' : 'No'],
+        ['Start date', @project.started_on],
+        ['Completed date', @project.completed_on],
+        ['Site URL', @project.site_url],
+        ['Repo URL', @project.repo_url],
+        ['Image URL', @project.image_url],
+        ['Sort order', @project.sort_order],
+        ['Summary', @project.summary],
+        ['Description', @project.description]
+      ].each do |label, value| %>
+        <tr>
+          <td><%= label %></td>
+          <td><%= value.present? ? value : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @project.project_metrics.any? %>
+  <div class="card mt">
+    <h3>Metrics</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Label</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.project_metrics.each do |metric| %>
+          <tr>
+            <td><%= metric.label %></td>
+            <td class="meta"><%= metric.value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

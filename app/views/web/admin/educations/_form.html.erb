@@ -1,0 +1,61 @@
+<%= form_with model: [:admin, @education], local: true do |f| %>
+  <% if @education.errors.any? %>
+    <div class="card form-errors">
+      <p>Please fix the following errors:</p>
+      <ul>
+        <% @education.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-grid">
+    <div>
+      <%= f.label :institution %>
+      <%= f.text_field :institution, class: 'input', required: true %>
+    </div>
+
+    <div>
+      <%= f.label :degree %>
+      <%= f.text_field :degree, class: 'input', required: true %>
+    </div>
+
+    <div>
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :sort_order %>
+      <%= f.number_field :sort_order, class: 'input', min: 0 %>
+    </div>
+  </div>
+
+  <% if @education.education_milestones.any? %>
+    <div class="card mt">
+      <h3>Milestones</h3>
+      <% f.fields_for :education_milestones do |mf| %>
+        <div class="highlight-row">
+          <div>
+            <%= mf.label :description %>
+            <%= mf.text_field :description, class: 'input' %>
+          </div>
+          <div>
+            <%= mf.label :occurred_on %>
+            <%= mf.date_field :occurred_on, class: 'input' %>
+            <div class="checkbox-field">
+              <%= mf.check_box :_destroy %>
+              <%= mf.label :_destroy, 'Remove' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit(@education.persisted? ? 'Save education' : 'Create education', class: 'primary') %>
+    <%= link_to 'Cancel', @education.persisted? ? admin_education_path(@education) : admin_educations_path, class: 'secondary' %>
+  </div>
+<% end %>

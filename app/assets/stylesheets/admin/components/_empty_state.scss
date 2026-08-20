@@ -1,0 +1,10 @@
+/* Empty state — shown when a list has no records yet. */
+.empty-state {
+  margin-top: 16px;
+  padding: 32px 18px;
+  text-align: center;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.empty-state p { margin: 0 0 12px }

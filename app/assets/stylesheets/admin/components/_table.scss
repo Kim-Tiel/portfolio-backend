@@ -1,0 +1,44 @@
+/* Shared list/detail table — replaces one-off inline-styled <table> markup. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px;
+  font-size: 12px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.table td {
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.table tbody tr:last-child td { border-bottom: none }
+
+.table .actions { white-space: nowrap }
+.table .actions > * + * { margin-left: 6px }
+
+// Detail (key/value) table for show pages.
+.detail-table td:first-child {
+  width: 180px;
+  font-weight: 600;
+}
+
+// Let wide list tables scroll horizontally instead of clipping actions
+// off-screen on narrow viewports.
+@media (max-width: 880px) {
+  .table:not(.detail-table) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
