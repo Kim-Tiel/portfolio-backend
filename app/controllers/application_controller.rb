@@ -9,7 +9,10 @@ class ApplicationController < ActionController::API
 
   # Return the secret used to sign/verify JWTs. Prefer a dedicated credential, fall back to secret_key_base or ENV.
   def jwt_secret
-    Rails.application.credentials.dig(:jwt, :secret) || Rails.application.credentials.secret_key_base || ENV['JWT_SECRET'] || Rails.application.secrets.secret_key_base
+    Rails.application.credentials.dig(:jwt, :secret) ||
+      Rails.application.credentials.secret_key_base ||
+      ENV['JWT_SECRET'] ||
+      Rails.application.secrets.secret_key_base
   end
 
   # Issue a JWT for the given admin. Default expiry: 30 days from now.

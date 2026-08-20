@@ -1,0 +1,23 @@
+/* Buttons — used as classes on links, submit inputs, and button_to forms. */
+.primary,
+.secondary,
+.danger {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.primary { background: var(--gradient); color: #fff }
+.primary:hover { filter: brightness(1.1) }
+
+.secondary { background: var(--surface); color: var(--text); border-color: var(--line-strong) }
+.secondary:hover { background: var(--paper) }
+
+.danger { background: var(--danger-bg); color: var(--danger); border-color: var(--danger) }
+.danger:hover { background: var(--danger); color: #fff }

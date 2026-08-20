@@ -6,7 +6,7 @@ module AdminAuthenticatable
   end
 
   def authenticate_admin!
-    token = request.headers['Authorization']&.split(' ')&.last
+    token = request.headers['Authorization']&.split&.last
     payload = JWT.decode(token, jwt_secret, true, algorithm: 'HS256').first
     @current_admin = ::Admin.find(payload['admin_id'])
   rescue JWT::ExpiredSignature

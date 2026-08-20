@@ -1,12 +1,16 @@
-<h2><%= @model_name %> — <%= @record.id %></h2>
-<table style="width:100%;border-collapse:collapse;margin-top:12px">
-  <tbody>
-    <% @record.attributes.each do |k,v| %>
-      <tr style="border-bottom:1px solid #f1f5fb">
-        <td style="padding:8px;width:200px;font-weight:600"><%= k %></td>
-        <td style="padding:8px"><%= v.present? ? v : '—' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<p style="margin-top:12px"><%= link_to 'Back to list', admin_resource_path(params[:resource]) %> • <%= link_to 'Dashboard', dashboard_path %></p>
+<h2><%= @model_name %> — <span class="meta"><%= @record.id %></span></h2>
+
+<div class="card mt">
+  <table class="table detail-table">
+    <tbody>
+      <% @record.attributes.each do |k, v| %>
+        <tr>
+          <td><%= k %></td>
+          <td><%= v.present? ? v : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<p class="mt"><%= link_to 'Back to list', admin_resource_path(params[:resource]) %> · <%= link_to 'Dashboard', dashboard_path %></p>

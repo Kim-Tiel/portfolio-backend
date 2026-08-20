@@ -48,9 +48,10 @@ Rails.application.routes.draw do
     get 'educations/:id/edit', to: 'educations#edit', as: 'edit_education'
     resources :educations, except: %i[new edit]
     resources :contact_messages, only: %i[index show destroy], controller: 'contact_messages'
+    resources :admins, only: %i[index show]
     post 'memory_log_entries/:id/approve', to: 'memory_log_entries#approve', as: 'approve_memory_log_entry'
     resources :memory_log_entries, path: 'memory_log_entries', only: %i[index show destroy]
- 
+
     # Generic admin resource views (simple, read-only for now)
     get ':resource', to: 'resources#index', as: 'resource'
     get ':resource/:id', to: 'resources#show', as: 'resource_item'

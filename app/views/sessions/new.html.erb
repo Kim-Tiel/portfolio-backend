@@ -4,11 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portfolio API — Login</title>
-  <%= render 'sessions/login_styles' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <%= stylesheet_link_tag 'sessions', media: 'all' %>
 </head>
-<body>
+<body style="background-color: #000";>
   <div class="wrap">
+    <%= image_tag 'logo.png', alt: '', class: 'login-logo' %>
     <h1>Admin Login</h1>
+    <p class="subtitle">Portfolio CMS</p>
 
     <% if flash[:alert] %>
       <div class="result error"><%= flash[:alert] %></div>
@@ -24,7 +29,7 @@
       <label for="password">Password</label>
       <%= password_field_tag :password, nil, id: 'password', required: true, autocomplete: 'current-password' %>
 
-      <%= submit_tag 'Sign in', class: 'btn' %>
+      <%= submit_tag 'Sign in', class: 'primary full-width' %>
     <% end %>
   </div>
 

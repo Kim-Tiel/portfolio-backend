@@ -9,8 +9,7 @@ module Web
         @entries = MemoryLogEntry.all
       end
 
-      def show
-      end
+      def show; end
 
       def destroy
         @entry.destroy

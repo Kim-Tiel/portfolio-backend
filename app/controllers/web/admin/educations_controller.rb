@@ -9,8 +9,7 @@ module Web
         @educations = Education.all
       end
 
-      def show
-      end
+      def show; end
 
       def new
         @education = Education.new

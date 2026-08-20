@@ -1,0 +1,21 @@
+/* Status badges — read/unread, approved/pending, proficiency, etc. */
+.badge {
+  display: inline-block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+.badge-accent {
+  border-color: var(--accent);
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.badge-ok { border-color: var(--ok); color: var(--ok); background: var(--ok-bg) }
+.badge-danger { border-color: var(--danger); color: var(--danger); background: var(--danger-bg) }

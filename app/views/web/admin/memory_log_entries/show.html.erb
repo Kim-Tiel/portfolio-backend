@@ -1,8 +1,8 @@
 <h2>Memory entry by <%= @entry.display_name %></h2>
 <p class="small">Submitted at <%= @entry.created_at.strftime('%Y-%m-%d %H:%M') %></p>
 
-<div class="card" style="margin-top:12px">
-  <pre style="white-space:pre-wrap"><%= @entry.message %></pre>
+<div class="card mt">
+  <pre class="message-body"><%= @entry.message %></pre>
 </div>
 
-<p style="margin-top:12px"><%= link_to 'Back', admin_memory_log_entries_path, class: 'secondary' %></p>
+<p class="mt"><%= link_to 'Back', admin_memory_log_entries_path, class: 'secondary' %></p>

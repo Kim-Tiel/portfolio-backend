@@ -48,6 +48,9 @@ module PortfolioApi
     # Support method override (allows forms to submit DELETE/PUT via _method param)
     config.middleware.use Rack::MethodOverride
 
+    # Throttle login attempts (see config/initializers/rack_attack.rb)
+    config.middleware.use Rack::Attack
+
     # Enable the asset pipeline for the admin UI in this API-only application.
     config.assets.enabled = true
     config.assets.paths << Rails.root.join('app', 'assets')

@@ -9,8 +9,7 @@ module Web
         @projects = Project.order(sort_order: :asc)
       end
 
-      def show
-      end
+      def show; end
 
       def new
         @project = Project.new

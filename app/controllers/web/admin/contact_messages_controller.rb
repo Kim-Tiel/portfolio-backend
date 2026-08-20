@@ -9,8 +9,7 @@ module Web
         @messages = ContactMessage.all
       end
 
-      def show
-      end
+      def show; end
 
       def destroy
         @message.destroy

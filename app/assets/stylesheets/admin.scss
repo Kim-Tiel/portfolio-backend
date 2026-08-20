@@ -5,7 +5,12 @@
 // components
 @import "admin/components/header";
 @import "admin/components/sidebar";
+@import "admin/components/buttons";
 @import "admin/components/forms";
+@import "admin/components/table";
+@import "admin/components/badges";
+@import "admin/components/empty_state";
+@import "admin/components/flash";
 
 // pages
 @import "admin/pages/profile";

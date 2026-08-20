@@ -33,8 +33,8 @@ module Web
     # Number of hours a web admin session should live (integer)
     # Priority: credentials -> ENV -> default 10
     def admin_session_ttl_hours
-      cred = Rails.application.credentials.respond_to?(:dig) ? Rails.application.credentials.dig(:admin_session_ttl_hours) : nil
-      env = ENV['ADMIN_SESSION_TTL_HOURS']
+      cred = Rails.application.credentials.respond_to?(:dig) ? Rails.application.credentials[:admin_session_ttl_hours] : nil
+      env = ENV.fetch('ADMIN_SESSION_TTL_HOURS', nil)
       (cred || env || 10).to_i
     end
 

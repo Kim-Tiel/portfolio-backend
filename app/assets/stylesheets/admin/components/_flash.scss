@@ -1,0 +1,14 @@
+/* Flash messages — auto-hidden by app/assets/javascripts/admin/components/flash.js */
+.flash-card {
+  position: fixed;
+  top: 90px;
+  right: 16px;
+  z-index: 100;
+  max-width: 280px;
+  padding: 10px 14px;
+  font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+.flash-card strong { font-weight: 600 }
+.flash-card .flash-alert { color: var(--danger) }
+.flash-card .flash-notice { color: var(--ok) }

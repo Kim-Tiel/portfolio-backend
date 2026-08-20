@@ -1,4 +1,4 @@
-<div class="actions-row" style="justify-content: space-between; align-items: center;">
+<div class="actions-row">
   <div>
     <h2>Skills</h2>
     <p class="small">Manage portfolio skills used by projects and experiences.</p>
@@ -8,29 +8,36 @@
   </div>
 </div>
 
-<table style="width:100%;border-collapse:collapse;margin-top:16px">
-  <thead>
-    <tr style="text-align:left;border-bottom:1px solid #e6eefc">
-      <th style="padding:10px">Name</th>
-      <th style="padding:10px">Category</th>
-      <th style="padding:10px">Proficiency</th>
-      <th style="padding:10px">Sort</th>
-      <th style="padding:10px">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @skills.each do |skill| %>
-      <tr style="border-bottom:1px solid #f1f5fb">
-        <td style="padding:10px;vertical-align:top"><%= skill.name %></td>
-        <td style="padding:10px;vertical-align:top"><%= skill.category.titleize %></td>
-        <td style="padding:10px;vertical-align:top"><%= skill.proficiency %></td>
-        <td style="padding:10px;vertical-align:top"><%= skill.sort_order %></td>
-        <td style="padding:10px;vertical-align:top">
-          <%= link_to 'View', admin_skill_path(skill), class: 'secondary' %>
-          <%= link_to 'Edit', admin_edit_skill_path(skill), class: 'secondary' %>
-          <%= button_to 'Delete', admin_skill_path(skill), method: :delete, data: { confirm: 'Remove this skill?' }, class: 'danger', form: { style: 'display:inline' } %>
-        </td>
+<% if @skills.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Proficiency</th>
+        <th>Sort</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @skills.each do |skill| %>
+        <tr>
+          <td><%= skill.name %></td>
+          <td><%= skill.category.titleize %></td>
+          <td class="meta"><%= skill.proficiency %></td>
+          <td class="meta"><%= skill.sort_order %></td>
+          <td class="actions">
+            <%= link_to 'View', admin_skill_path(skill), class: 'secondary' %>
+            <%= link_to 'Edit', admin_edit_skill_path(skill), class: 'secondary' %>
+            <%= button_to 'Delete', admin_skill_path(skill), method: :delete, data: { confirm: 'Remove this skill?' }, class: 'danger', form: { style: 'display:inline' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No skills yet.</p>
+    <%= link_to 'Add your first skill', admin_new_skill_path, class: 'primary' %>
+  </div>
+<% end %>

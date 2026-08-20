@@ -1,7 +1,7 @@
 <%= form_with model: [:admin, @skill], local: true do |f| %>
   <% if @skill.errors.any? %>
-    <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:16px">
-      <p style="color:#7f1d1d;font-weight:700">Please fix the following errors:</p>
+    <div class="card form-errors">
+      <p>Please fix the following errors:</p>
       <ul>
         <% @skill.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div class="form-grid">
     <div>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'input', required: true %>
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+  <div class="form-actions">
     <%= f.submit(@skill.persisted? ? 'Save skill' : 'Create skill', class: 'primary') %>
     <%= link_to 'Cancel', @skill.persisted? ? admin_skill_path(@skill) : admin_skills_path, class: 'secondary' %>
   </div>

@@ -1,7 +1,7 @@
 <%= form_with model: [:admin, @experience], local: true do |f| %>
   <% if @experience.errors.any? %>
-    <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:16px">
-      <p style="color:#7f1d1d;font-weight:700">Please fix the following errors:</p>
+    <div class="card form-errors">
+      <p>Please fix the following errors:</p>
       <ul>
         <% @experience.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div class="form-grid">
     <div>
       <%= f.label :company %>
       <%= f.text_field :company, class: 'input', required: true %>
@@ -28,7 +28,7 @@
 
     <div>
       <%= f.label :is_remote %>
-      <div style="margin-top:8px">
+      <div class="checkbox-field">
         <%= f.check_box :is_remote %>
         <%= f.label :is_remote, 'Remote role' %>
       </div>
@@ -44,7 +44,7 @@
       <%= f.date_field :end_date, class: 'input' %>
     </div>
 
-    <div style="grid-column:1 / -1">
+    <div class="full">
       <%= f.label :commit_hash %>
       <%= f.text_field :commit_hash, class: 'input' %>
       <p class="small">Optional commit hash reference for reproducible snapshots</p>
@@ -52,10 +52,10 @@
   </div>
 
   <% if @experience.experience_highlights.any? %>
-    <div class="card" style="margin-top:18px">
+    <div class="card mt">
       <h3>Highlights</h3>
       <% f.fields_for :experience_highlights do |hf| %>
-        <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;margin-top:12px">
+        <div class="highlight-row">
           <div>
             <%= hf.label :text, 'Highlight' %>
             <%= hf.text_field :text, class: 'input' %>
@@ -73,7 +73,7 @@
     </div>
   <% end %>
 
-  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+  <div class="form-actions">
     <%= f.submit(@experience.persisted? ? 'Save experience' : 'Create experience', class: 'primary') %>
     <%= link_to 'Cancel', @experience.persisted? ? admin_experience_path(@experience) : admin_experiences_path, class: 'secondary' %>
   </div>

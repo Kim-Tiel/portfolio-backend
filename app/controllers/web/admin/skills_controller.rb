@@ -9,8 +9,7 @@ module Web
         @skills = Skill.all
       end
 
-      def show
-      end
+      def show; end
 
       def new
         @skill = Skill.new
@@ -26,8 +25,7 @@ module Web
         end
       end
 
-      def edit
-      end
+      def edit; end
 
       def update
         if @skill.update(skill_params)

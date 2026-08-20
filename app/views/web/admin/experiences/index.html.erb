@@ -1,4 +1,4 @@
-<div class="actions-row" style="justify-content: space-between; align-items: center;">
+<div class="actions-row">
   <div>
     <h2>Experiences</h2>
     <p class="small">Manage professional experiences.</p>
@@ -8,27 +8,34 @@
   </div>
 </div>
 
-<table style="width:100%;border-collapse:collapse;margin-top:16px">
-  <thead>
-    <tr style="text-align:left;border-bottom:1px solid #e6eefc">
-      <th style="padding:10px">Company</th>
-      <th style="padding:10px">Role</th>
-      <th style="padding:10px">Dates</th>
-      <th style="padding:10px">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @experiences.each do |exp| %>
-      <tr style="border-bottom:1px solid #f1f5fb">
-        <td style="padding:10px;vertical-align:top"><%= exp.company %></td>
-        <td style="padding:10px;vertical-align:top"><%= exp.role %></td>
-        <td style="padding:10px;vertical-align:top"><%= exp.start_date %> — <%= exp.end_date || 'Present' %></td>
-        <td style="padding:10px;vertical-align:top">
-          <%= link_to 'View', admin_experience_path(exp), class: 'secondary' %>
-          <%= link_to 'Edit', admin_edit_experience_path(exp), class: 'secondary' %>
-          <%= button_to 'Delete', admin_experience_path(exp), method: :delete, data: { confirm: 'Remove this experience?' }, class: 'danger', form: { style: 'display:inline' } %>
-        </td>
+<% if @experiences.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Dates</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @experiences.each do |exp| %>
+        <tr>
+          <td><%= exp.company %></td>
+          <td><%= exp.role %></td>
+          <td class="meta"><%= exp.start_date %> — <%= exp.end_date || 'Present' %></td>
+          <td class="actions">
+            <%= link_to 'View', admin_experience_path(exp), class: 'secondary' %>
+            <%= link_to 'Edit', admin_edit_experience_path(exp), class: 'secondary' %>
+            <%= button_to 'Delete', admin_experience_path(exp), method: :delete, data: { confirm: 'Remove this experience?' }, class: 'danger', form: { style: 'display:inline' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No experiences yet.</p>
+    <%= link_to 'Add your first experience', admin_new_experience_path, class: 'primary' %>
+  </div>
+<% end %>

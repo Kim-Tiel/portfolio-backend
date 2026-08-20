@@ -1,7 +1,7 @@
 <%= form_with model: [:admin, @education], local: true do |f| %>
   <% if @education.errors.any? %>
-    <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:16px">
-      <p style="color:#7f1d1d;font-weight:700">Please fix the following errors:</p>
+    <div class="card form-errors">
+      <p>Please fix the following errors:</p>
       <ul>
         <% @education.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div class="form-grid">
     <div>
       <%= f.label :institution %>
       <%= f.text_field :institution, class: 'input', required: true %>
@@ -33,10 +33,10 @@
   </div>
 
   <% if @education.education_milestones.any? %>
-    <div class="card" style="margin-top:18px">
+    <div class="card mt">
       <h3>Milestones</h3>
       <% f.fields_for :education_milestones do |mf| %>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-top:12px">
+        <div class="highlight-row">
           <div>
             <%= mf.label :description %>
             <%= mf.text_field :description, class: 'input' %>
@@ -44,15 +44,17 @@
           <div>
             <%= mf.label :occurred_on %>
             <%= mf.date_field :occurred_on, class: 'input' %>
-            <%= mf.check_box :_destroy %>
-            <%= mf.label :_destroy, 'Remove' %>
+            <div class="checkbox-field">
+              <%= mf.check_box :_destroy %>
+              <%= mf.label :_destroy, 'Remove' %>
+            </div>
           </div>
         </div>
       <% end %>
     </div>
   <% end %>
 
-  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+  <div class="form-actions">
     <%= f.submit(@education.persisted? ? 'Save education' : 'Create education', class: 'primary') %>
     <%= link_to 'Cancel', @education.persisted? ? admin_education_path(@education) : admin_educations_path, class: 'secondary' %>
   </div>

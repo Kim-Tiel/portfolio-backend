@@ -9,8 +9,7 @@ module Web
         @experiences = Experience.all
       end
 
-      def show
-      end
+      def show; end
 
       def new
         @experience = Experience.new

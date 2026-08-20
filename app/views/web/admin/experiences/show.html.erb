@@ -1,0 +1,47 @@
+<div class="actions-row">
+  <div>
+    <h2><%= @experience.role %> · <%= @experience.company %></h2>
+    <p class="small"><%= @experience.start_date %> — <%= @experience.end_date || 'Present' %></p>
+  </div>
+  <div>
+    <%= link_to 'Edit', admin_edit_experience_path(@experience), class: 'secondary' %>
+    <%= link_to 'Back to experiences', admin_experiences_path, class: 'secondary' %>
+  </div>
+</div>
+
+<div class="card mt">
+  <table class="table detail-table">
+    <tbody>
+      <% [
+        ['Company', @experience.company],
+        ['Role', @experience.role],
+        ['Location', @experience.location],
+        ['Remote', @experience.is_remote ? 'Yes' : 'No'],
+        ['Start date', @experience.start_date],
+        ['End date', @experience.end_date || 'Present'],
+        ['Commit hash', @experience.commit_hash],
+        ['Sort order', @experience.sort_order]
+      ].each do |label, value| %>
+        <tr>
+          <td><%= label %></td>
+          <td><%= value.present? ? value : '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @experience.experience_highlights.any? %>
+  <div class="card mt">
+    <h3>Highlights</h3>
+    <table class="table">
+      <tbody>
+        <% @experience.experience_highlights.each do |highlight| %>
+          <tr>
+            <td><%= highlight.text %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
