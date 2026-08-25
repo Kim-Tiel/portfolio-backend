@@ -22,8 +22,31 @@
     </div>
 
     <div>
+      <%= f.label :field %>
+      <%= f.text_field :field, class: 'input', required: true %>
+    </div>
+
+    <div>
       <%= f.label :location %>
       <%= f.text_field :location, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :start_date %>
+      <%= f.date_field :start_date, class: 'input', required: true %>
+    </div>
+
+    <div>
+      <%= f.label :end_date %>
+      <%= f.date_field :end_date, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :graduated %>
+      <div class="checkbox-field">
+        <%= f.check_box :graduated %>
+        <%= f.label :graduated, 'Graduated' %>
+      </div>
     </div>
 
     <div>
