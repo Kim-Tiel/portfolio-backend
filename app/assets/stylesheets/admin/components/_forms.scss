@@ -44,6 +44,12 @@ label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; t
   align-items: end;
   margin-top: 12px;
 }
+// .highlight-row's own `display: grid` ties [hidden]'s specificity and wins
+// on source order, so the browser's default [hidden] { display: none } never
+// applies — milestone rows marked removed would stay visible. Restate it here.
+.highlight-row[hidden] {
+  display: none;
+}
 
 @media (max-width: 880px) {
   .metrics-grid { grid-template-columns: 1fr 1fr }
