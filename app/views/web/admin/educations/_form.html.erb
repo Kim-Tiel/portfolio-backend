@@ -1,4 +1,4 @@
-<%= form_with model: [:admin, @education], local: true do |f| %>
+<%= form_with model: [:admin, @education], local: true, data: (@education.persisted? ? { confirm_message: 'Are you sure do you want to save data?', confirm_action: 'Save', confirm_skip_unchanged: 'true' } : {}) do |f| %>
   <% if @education.errors.any? %>
     <div class="card form-errors">
       <p>Please fix the following errors:</p>
@@ -42,10 +42,10 @@
     </div>
 
     <div>
-      <%= f.label :graduated %>
+      <%= f.label :is_graduated %>
       <div class="checkbox-field">
-        <%= f.check_box :graduated %>
-        <%= f.label :graduated, 'Graduated' %>
+        <%= f.check_box :is_graduated %>
+        <%= f.label :is_graduated, 'Graduated' %>
       </div>
     </div>
 
@@ -55,27 +55,23 @@
     </div>
   </div>
 
-  <% if @education.education_milestones.any? %>
-    <div class="card mt">
-      <h3>Milestones</h3>
-      <% f.fields_for :education_milestones do |mf| %>
-        <div class="highlight-row">
-          <div>
-            <%= mf.label :description %>
-            <%= mf.text_field :description, class: 'input' %>
-          </div>
-          <div>
-            <%= mf.label :occurred_on %>
-            <%= mf.date_field :occurred_on, class: 'input' %>
-            <div class="checkbox-field">
-              <%= mf.check_box :_destroy %>
-              <%= mf.label :_destroy, 'Remove' %>
-            </div>
-          </div>
-        </div>
+
+  <div class="card mt">
+    <h3>Milestones</h3>
+    <div id="milestone-rows">
+      <%= f.fields_for :education_milestones do |mf| %>
+        <%= render 'milestone_fields', mf: mf %>
       <% end %>
     </div>
-  <% end %>
+
+    <button type="button" id="add-milestone" class="secondary mt" data-milestones-container="milestone-rows" data-milestone-template="milestone-template">+ Add another milestone</button>
+
+    <template id="milestone-template">
+      <%= f.fields_for :education_milestones, EducationMilestone.new, child_index: 'NEW_MILESTONE_INDEX' do |mf| %>
+        <%= render 'milestone_fields', mf: mf %>
+      <% end %>
+    </template>
+  </div>
 
   <div class="form-actions">
     <%= f.submit(@education.persisted? ? 'Save education' : 'Create education', class: 'primary') %>

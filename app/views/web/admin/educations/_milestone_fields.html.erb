@@ -1,0 +1,14 @@
+<div class="highlight-row" data-milestone-row>
+  <div>
+    <%= mf.label :description %>
+    <%= mf.text_field :description, class: 'input' %>
+  </div>
+  <div>
+    <%= mf.label :occurred_on %>
+    <%= mf.date_field :occurred_on, class: 'input' %>
+  </div>
+  <div>
+    <%= mf.check_box :_destroy, style: 'display: none' %>
+    <button type="button" class="secondary remove-milestone-btn">Remove</button>
+  </div>
+</div>

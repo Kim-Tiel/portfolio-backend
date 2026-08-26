@@ -53,12 +53,12 @@ module Web
       end
 
       def education_params
-        params.require(:education).permit(:institution, :degree, :location, :sort_order,
+        params.require(:education).permit(:institution, :degree, :location, :sort_order, :field, :start_date, :end_date, :is_graduated,
                                           education_milestones_attributes: %i[id occurred_on description _destroy])
       end
 
       def build_milestone_rows
-        (4 - @education.education_milestones.size).times { @education.education_milestones.build }
+        (1 - @education.education_milestones.size).times { @education.education_milestones.build }
       end
     end
   end

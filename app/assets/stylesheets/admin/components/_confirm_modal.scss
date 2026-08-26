@@ -1,0 +1,41 @@
+/* Universal confirm dialog — shared by delete and edit-save flows in every admin module. */
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// `.confirm-modal` sets its own `display: flex`, which ties [hidden]'s
+// specificity and would otherwise win on source order — restate display:none
+// explicitly so toggling the `hidden` attribute actually hides the dialog.
+.confirm-modal[hidden] {
+  display: none;
+}
+
+.confirm-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 13, 20, 0.55);
+}
+
+.confirm-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 16px;
+}
+
+.confirm-modal-message {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.confirm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
