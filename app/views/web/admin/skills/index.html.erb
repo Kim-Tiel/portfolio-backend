@@ -29,7 +29,7 @@
           <td class="actions">
             <%= link_to 'View', admin_skill_path(skill), class: 'secondary' %>
             <%= link_to 'Edit', admin_edit_skill_path(skill), class: 'secondary' %>
-            <%= button_to 'Delete', admin_skill_path(skill), method: :delete, data: { confirm: 'Remove this skill?' }, class: 'danger', form: { style: 'display:inline' } %>
+            <%= button_to 'Delete', admin_skill_path(skill), method: :delete, class: 'danger', form: { style: 'display:inline', data: { confirm_message: 'Are you sure do you want to delete?', confirm_action: 'Delete', confirm_variant: 'danger' } } %>
           </td>
         </tr>
       <% end %>
