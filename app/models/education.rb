@@ -1,6 +1,9 @@
 class Education < ApplicationRecord
-  has_many :education_milestones, -> { order(occurred_on: :asc) }, dependent: :destroy
-  accepts_nested_attributes_for :education_milestones, allow_destroy: true
+  has_many :education_milestones, -> { order(occurred_on: :asc) }, dependent: :destroy, inverse_of: :education
+  accepts_nested_attributes_for :education_milestones, allow_destroy: true,
+                                                       reject_if: proc { |attrs|
+                                                         attrs['description'].blank? && attrs['occurred_on'].blank?
+                                                       }
 
   validates :institution, :degree, presence: true
 

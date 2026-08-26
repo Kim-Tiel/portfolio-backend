@@ -58,7 +58,7 @@ module Web
       end
 
       def build_milestone_rows
-        (4 - @education.education_milestones.size).times { @education.education_milestones.build }
+        (1 - @education.education_milestones.size).times { @education.education_milestones.build }
       end
     end
   end

@@ -25,6 +25,8 @@
     <% end %>
 
     <%= yield %>
+
+    <%= render 'shared/confirm_modal' %>
   </div>
 
   <%= javascript_include_tag 'admin' %>
