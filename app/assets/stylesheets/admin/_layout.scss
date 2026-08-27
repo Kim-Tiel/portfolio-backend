@@ -104,7 +104,7 @@
   .grid { grid-template-columns: 1fr }
 }
 
-.flash-card {
+.flash-card, .form-errors {
   transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease, padding 0.4s ease;
 }
 

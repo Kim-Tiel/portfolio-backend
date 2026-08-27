@@ -1,0 +1,14 @@
+<div class="highlight-row" data-fields-row>
+  <div>
+    <%= hf.label :text, 'Highlight' %>
+    <%= hf.text_field :text, class: 'input' %>
+  </div>
+  <div>
+    <%= hf.label :sort_order %>
+    <%= hf.number_field :sort_order, class: 'input', min: 0, data: { sort_order_input: true } %>
+  </div>
+  <div>
+    <%= hf.check_box :_destroy, style: 'display: none' %>
+    <button type="button" class="secondary remove-fields-btn">Remove</button>
+  </div>
+</div>

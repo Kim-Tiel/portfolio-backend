@@ -1,0 +1,65 @@
+/* Checkbox dropdown for picking experience skills, plus the selected-skill chip list below it. */
+.skills-select details {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.skills-select summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--text);
+}
+.skills-select summary::-webkit-details-marker { display: none }
+.skills-select summary::after { content: '▾'; float: right; color: var(--muted) }
+.skills-select details[open] summary::after { content: '▴' }
+
+.skills-select-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 4px 12px;
+  padding: 4px 10px 10px;
+  border-top: 1px solid var(--line);
+}
+
+.skills-select-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  text-transform: none;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.skills-select-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.skills-select-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--ink-2);
+  font-size: 12px;
+  color: #fff;
+}
+
+.skills-select-chip-remove {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+.skills-select-chip-remove:hover { color: var(--danger) }

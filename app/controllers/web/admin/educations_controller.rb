@@ -21,7 +21,6 @@ module Web
         if @education.save
           redirect_to admin_education_path(@education), notice: 'Education created successfully.'
         else
-          flash.now[:alert] = 'Unable to save education. Please check the form.'
           build_milestone_rows
           render :new
         end
@@ -35,7 +34,6 @@ module Web
         if @education.update(education_params)
           redirect_to admin_education_path(@education), notice: 'Education updated successfully.'
         else
-          flash.now[:alert] = 'Unable to save education. Please check the form.'
           build_milestone_rows
           render :edit
         end
