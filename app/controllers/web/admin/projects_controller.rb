@@ -21,7 +21,6 @@ module Web
         if @project.save
           redirect_to admin_project_path(@project), notice: 'Project created successfully.'
         else
-          flash.now[:alert] = 'Unable to save project. Please check the form.'
           build_metric_rows
           render :new
         end
@@ -35,7 +34,6 @@ module Web
         if @project.update(project_params)
           redirect_to admin_project_path(@project), notice: 'Project updated successfully.'
         else
-          flash.now[:alert] = 'Unable to save project. Please check the form.'
           build_metric_rows
           render :edit
         end
