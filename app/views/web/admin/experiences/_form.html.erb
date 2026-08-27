@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<%= form_with model: [:admin, @experience], local: true do |f| %>
-=======
 <%= form_with model: [:admin, @experience], local: true, data: (@experience.persisted? ? { confirm_message: 'Are you sure do you want to save data?', confirm_action: 'Save', confirm_skip_unchanged: 'true' } : {}) do |f| %>
->>>>>>> origin/develop
   <% if @experience.errors.any? %>
     <div class="card form-errors">
       <p>Please fix the following errors:</p>
@@ -47,37 +43,6 @@
       <%= f.label :end_date %>
       <%= f.date_field :end_date, class: 'input' %>
     </div>
-<<<<<<< HEAD
-
-    <div class="full">
-      <%= f.label :commit_hash %>
-      <%= f.text_field :commit_hash, class: 'input' %>
-      <p class="small">Optional commit hash reference for reproducible snapshots</p>
-    </div>
-  </div>
-
-  <% if @experience.experience_highlights.any? %>
-    <div class="card mt">
-      <h3>Highlights</h3>
-      <% f.fields_for :experience_highlights do |hf| %>
-        <div class="highlight-row">
-          <div>
-            <%= hf.label :text, 'Highlight' %>
-            <%= hf.text_field :text, class: 'input' %>
-          </div>
-          <div>
-            <%= hf.label :sort_order %>
-            <%= hf.number_field :sort_order, class: 'input', min: 0 %>
-          </div>
-          <div>
-            <%= hf.label :_destroy, 'Remove' %>
-            <%= hf.check_box :_destroy %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-=======
   </div>
 
   <div class="card mt">
@@ -113,7 +78,6 @@
       <% end %>
     </template>
   </div>
->>>>>>> origin/develop
 
   <div class="form-actions">
     <%= f.submit(@experience.persisted? ? 'Save experience' : 'Create experience', class: 'primary') %>

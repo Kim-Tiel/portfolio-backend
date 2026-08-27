@@ -4,12 +4,7 @@ class Education < ApplicationRecord
                                                        reject_if: proc { |attrs|
                                                          attrs['description'].blank? && attrs['occurred_on'].blank?
                                                        }
-<<<<<<< HEAD
-
-  validates :institution, :degree, presence: true
-=======
   validates :institution, :degree, :field, :start_date, :end_date, :is_graduated, presence: true
->>>>>>> origin/develop
 
   default_scope { order(sort_order: :asc) }
 end

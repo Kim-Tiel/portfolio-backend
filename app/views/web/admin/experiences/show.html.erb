@@ -19,10 +19,6 @@
         ['Remote', @experience.is_remote ? 'Yes' : 'No'],
         ['Start date', @experience.start_date],
         ['End date', @experience.end_date || 'Present'],
-<<<<<<< HEAD
-        ['Commit hash', @experience.commit_hash],
-=======
->>>>>>> origin/develop
         ['Sort order', @experience.sort_order]
       ].each do |label, value| %>
         <tr>
@@ -34,8 +30,6 @@
   </table>
 </div>
 
-<<<<<<< HEAD
-=======
 <% if @experience.skills.any? %>
   <div class="card mt">
     <h3>Skills</h3>
@@ -47,7 +41,6 @@
   </div>
 <% end %>
 
->>>>>>> origin/develop
 <% if @experience.experience_highlights.any? %>
   <div class="card mt">
     <h3>Highlights</h3>

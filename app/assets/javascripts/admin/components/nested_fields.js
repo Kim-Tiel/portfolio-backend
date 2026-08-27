@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-// Dynamic "add another" rows for nested fields_for sections (e.g. education milestones).
-// Usage: a <button data-milestones-container="ID" data-milestone-template="TEMPLATE_ID">
-// next to a <template id="TEMPLATE_ID"> containing one fields_for block rendered with
-// child_index: 'NEW_MILESTONE_INDEX', and a container <div id="ID"> to append into.
-document.addEventListener('DOMContentLoaded', function(){
-  const addButton = document.getElementById('add-milestone')
-
-  function wireRemoveButton(button){
-    button.addEventListener('click', function(){
-      const row = button.closest('[data-milestone-row]')
-=======
 // Dynamic "add another" rows for nested fields_for sections (e.g. education
 // milestones, experience highlights).
 // Usage: a <button class="add-fields-btn" data-fields-container="ID" data-fields-template="TEMPLATE_ID">
@@ -20,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function(){
   function wireRemoveButton(button){
     button.addEventListener('click', function(){
       const row = button.closest('[data-fields-row]')
->>>>>>> origin/develop
       if(!row) return
 
       // Rails appends the nested-attributes hidden id field as a sibling
@@ -42,27 +29,6 @@ document.addEventListener('DOMContentLoaded', function(){
     })
   }
 
-<<<<<<< HEAD
-  document.querySelectorAll('.remove-milestone-btn').forEach(wireRemoveButton)
-
-  if(!addButton) return
-
-  addButton.addEventListener('click', function(){
-    const container = document.getElementById(addButton.dataset.milestonesContainer)
-    const template = document.getElementById(addButton.dataset.milestoneTemplate)
-    if(!container || !template) return
-
-    const uniqueIndex = new Date().getTime()
-    const html = template.innerHTML.replace(/NEW_MILESTONE_INDEX/g, uniqueIndex)
-
-    const wrapper = document.createElement('div')
-    wrapper.innerHTML = html
-    const newRow = wrapper.firstElementChild
-    container.appendChild(newRow)
-
-    const newRemoveButton = newRow.querySelector('.remove-milestone-btn')
-    if(newRemoveButton) wireRemoveButton(newRemoveButton)
-=======
   document.querySelectorAll('.remove-fields-btn').forEach(wireRemoveButton)
 
   document.querySelectorAll('.add-fields-btn').forEach(function(addButton){
@@ -94,6 +60,5 @@ document.addEventListener('DOMContentLoaded', function(){
       const newRemoveButton = newRow.querySelector('.remove-fields-btn')
       if(newRemoveButton) wireRemoveButton(newRemoveButton)
     })
->>>>>>> origin/develop
   })
 })

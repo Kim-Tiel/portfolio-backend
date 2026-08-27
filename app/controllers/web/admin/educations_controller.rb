@@ -21,10 +21,6 @@ module Web
         if @education.save
           redirect_to admin_education_path(@education), notice: 'Education created successfully.'
         else
-<<<<<<< HEAD
-          flash.now[:alert] = 'Unable to save education. Please check the form.'
-=======
->>>>>>> origin/develop
           build_milestone_rows
           render :new
         end
@@ -38,10 +34,6 @@ module Web
         if @education.update(education_params)
           redirect_to admin_education_path(@education), notice: 'Education updated successfully.'
         else
-<<<<<<< HEAD
-          flash.now[:alert] = 'Unable to save education. Please check the form.'
-=======
->>>>>>> origin/develop
           build_milestone_rows
           render :edit
         end
@@ -59,11 +51,7 @@ module Web
       end
 
       def education_params
-<<<<<<< HEAD
-        params.require(:education).permit(:institution, :degree, :location, :sort_order,
-=======
         params.require(:education).permit(:institution, :degree, :location, :sort_order, :field, :start_date, :end_date, :is_graduated,
->>>>>>> origin/develop
                                           education_milestones_attributes: %i[id occurred_on description _destroy])
       end
 
