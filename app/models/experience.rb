@@ -1,6 +1,14 @@
 class Experience < ApplicationRecord
   has_many :experience_highlights, -> { order(sort_order: :asc) }, dependent: :destroy
+<<<<<<< HEAD
   accepts_nested_attributes_for :experience_highlights, allow_destroy: true
+=======
+  # Rejects rows with no highlight text, not :all_blank — the sort_order box
+  # is auto-filled for every blank padding row, so :all_blank would never
+  # see them as empty and they'd fail the ExperienceHighlight text presence
+  # validation on save.
+  accepts_nested_attributes_for :experience_highlights, allow_destroy: true, reject_if: proc { |attrs| attrs['text'].blank? }
+>>>>>>> origin/develop
 
   has_many :experience_skills, dependent: :destroy
   has_many :skills, through: :experience_skills

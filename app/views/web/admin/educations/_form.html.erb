@@ -22,16 +22,49 @@
     </div>
 
     <div>
+<<<<<<< HEAD
+=======
+      <%= f.label :field %>
+      <%= f.text_field :field, class: 'input', required: true %>
+    </div>
+
+    <div>
+>>>>>>> origin/develop
       <%= f.label :location %>
       <%= f.text_field :location, class: 'input' %>
     </div>
 
     <div>
+<<<<<<< HEAD
+=======
+      <%= f.label :start_date %>
+      <%= f.date_field :start_date, class: 'input', required: true %>
+    </div>
+
+    <div>
+      <%= f.label :end_date %>
+      <%= f.date_field :end_date, class: 'input' %>
+    </div>
+
+    <div>
+      <%= f.label :is_graduated %>
+      <div class="checkbox-field">
+        <%= f.check_box :is_graduated %>
+        <%= f.label :is_graduated, 'Graduated' %>
+      </div>
+    </div>
+
+    <div>
+>>>>>>> origin/develop
       <%= f.label :sort_order %>
       <%= f.number_field :sort_order, class: 'input', min: 0 %>
     </div>
   </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/develop
   <div class="card mt">
     <h3>Milestones</h3>
     <div id="milestone-rows">
@@ -40,10 +73,18 @@
       <% end %>
     </div>
 
+<<<<<<< HEAD
     <button type="button" id="add-milestone" class="secondary mt" data-milestones-container="milestone-rows" data-milestone-template="milestone-template">+ Add another milestone</button>
 
     <template id="milestone-template">
       <%= f.fields_for :education_milestones, EducationMilestone.new, child_index: 'NEW_MILESTONE_INDEX' do |mf| %>
+=======
+
+    <button type="button" class="secondary mt add-fields-btn" data-fields-container="milestone-rows" data-fields-template="milestone-template">+ Add another milestone</button>
+
+    <template id="milestone-template">
+      <%= f.fields_for :education_milestones, EducationMilestone.new, child_index: 'NEW_RECORD_INDEX' do |mf| %>
+>>>>>>> origin/develop
         <%= render 'milestone_fields', mf: mf %>
       <% end %>
     </template>

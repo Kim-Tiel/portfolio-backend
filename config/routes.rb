@@ -57,5 +57,5 @@ Rails.application.routes.draw do
     get ':resource/:id', to: 'resources#show', as: 'resource_item'
   end
 
-  get 'up' => 'rails/health#show', as: :rails_health_check
+  get 'up' => 'health#show', as: :rails_health_check
 end

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <%= form_with model: [:admin, @experience], local: true do |f| %>
+=======
+<%= form_with model: [:admin, @experience], local: true, data: (@experience.persisted? ? { confirm_message: 'Are you sure do you want to save data?', confirm_action: 'Save', confirm_skip_unchanged: 'true' } : {}) do |f| %>
+>>>>>>> origin/develop
   <% if @experience.errors.any? %>
     <div class="card form-errors">
       <p>Please fix the following errors:</p>
@@ -43,6 +47,7 @@
       <%= f.label :end_date %>
       <%= f.date_field :end_date, class: 'input' %>
     </div>
+<<<<<<< HEAD
 
     <div class="full">
       <%= f.label :commit_hash %>
@@ -72,6 +77,43 @@
       <% end %>
     </div>
   <% end %>
+=======
+  </div>
+
+  <div class="card mt">
+    <h3>Skills</h3>
+    <div class="skills-select" data-skills-select>
+      <details>
+        <summary data-skills-summary>Select skills</summary>
+        <div class="skills-select-options">
+          <%= f.collection_check_boxes :skill_ids, Skill.all, :id, :name do |cb| %>
+            <label class="skills-select-option">
+              <%= cb.check_box %> <%= cb.text %>
+            </label>
+          <% end %>
+        </div>
+      </details>
+      <div class="skills-select-chips" data-skills-chips></div>
+    </div>
+  </div>
+
+  <div class="card mt">
+    <h3>Highlights</h3>
+    <div id="highlight-rows">
+      <%= f.fields_for :experience_highlights do |hf| %>
+        <%= render 'highlight_fields', hf: hf %>
+      <% end %>
+    </div>
+
+    <button type="button" class="secondary mt add-fields-btn" data-fields-container="highlight-rows" data-fields-template="highlight-template">+ Add another highlight</button>
+
+    <template id="highlight-template">
+      <%= f.fields_for :experience_highlights, ExperienceHighlight.new, child_index: 'NEW_RECORD_INDEX' do |hf| %>
+        <%= render 'highlight_fields', hf: hf %>
+      <% end %>
+    </template>
+  </div>
+>>>>>>> origin/develop
 
   <div class="form-actions">
     <%= f.submit(@experience.persisted? ? 'Save experience' : 'Create experience', class: 'primary') %>

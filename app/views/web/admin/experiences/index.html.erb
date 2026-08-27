@@ -27,7 +27,11 @@
           <td class="actions">
             <%= link_to 'View', admin_experience_path(exp), class: 'secondary' %>
             <%= link_to 'Edit', admin_edit_experience_path(exp), class: 'secondary' %>
+<<<<<<< HEAD
             <%= button_to 'Delete', admin_experience_path(exp), method: :delete, data: { confirm: 'Remove this experience?' }, class: 'danger', form: { style: 'display:inline' } %>
+=======
+            <%= button_to 'Delete', admin_experience_path(exp), method: :delete, class: 'danger', form: { style: 'display:inline', data: { confirm_message: 'Are you sure do you want to delete?', confirm_action: 'Delete', confirm_variant: 'danger' } } %>
+>>>>>>> origin/develop
           </td>
         </tr>
       <% end %>
