@@ -21,7 +21,6 @@ module Web
         if @experience.save
           redirect_to admin_experience_path(@experience), notice: 'Experience created successfully.'
         else
-          flash.now[:alert] = 'Unable to save experience. Please check the form.'
           build_highlight_rows
           render :new
         end
@@ -35,7 +34,6 @@ module Web
         if @experience.update(experience_params)
           redirect_to admin_experience_path(@experience), notice: 'Experience updated successfully.'
         else
-          flash.now[:alert] = 'Unable to save experience. Please check the form.'
           build_highlight_rows
           render :edit
         end
@@ -55,12 +53,16 @@ module Web
       def experience_params
         params.require(:experience).permit(
           :company, :role, :location, :is_remote, :start_date, :end_date,
-          :commit_hash, :sort_order, skill_ids: [], experience_highlights_attributes: %i[id text sort_order _destroy]
+          :sort_order, skill_ids: [], experience_highlights_attributes: %i[id text sort_order _destroy]
         )
       end
 
       def build_highlight_rows
-        (4 - @experience.experience_highlights.size).times { @experience.experience_highlights.build }
+        next_sort_order = (@experience.experience_highlights.map(&:sort_order).max || -1) + 1
+        (1 - @experience.experience_highlights.size).times do
+          @experience.experience_highlights.build(sort_order: next_sort_order)
+          next_sort_order += 1
+        end
       end
     end
   end

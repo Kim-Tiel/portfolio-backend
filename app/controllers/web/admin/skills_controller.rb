@@ -20,7 +20,6 @@ module Web
         if @skill.save
           redirect_to admin_skill_path(@skill), notice: 'Skill created successfully.'
         else
-          flash.now[:alert] = 'Unable to save skill. Please check the form.'
           render :new
         end
       end
@@ -31,7 +30,6 @@ module Web
         if @skill.update(skill_params)
           redirect_to admin_skill_path(@skill), notice: 'Skill updated successfully.'
         else
-          flash.now[:alert] = 'Unable to save skill. Please check the form.'
           render :edit
         end
       end

@@ -1,5 +1,5 @@
 function hideFlashMessages() {
-  var flashContainers = document.querySelectorAll('.flash-card, .flash-messages')
+  var flashContainers = document.querySelectorAll('.flash-card, .flash-messages, .form-errors')
   if (!flashContainers.length) return
 
   window.setTimeout(function() {

@@ -1,4 +1,4 @@
-<%= form_with model: [:admin, @experience], local: true do |f| %>
+<%= form_with model: [:admin, @experience], local: true, data: (@experience.persisted? ? { confirm_message: 'Are you sure do you want to save data?', confirm_action: 'Save', confirm_skip_unchanged: 'true' } : {}) do |f| %>
   <% if @experience.errors.any? %>
     <div class="card form-errors">
       <p>Please fix the following errors:</p>
@@ -43,35 +43,41 @@
       <%= f.label :end_date %>
       <%= f.date_field :end_date, class: 'input' %>
     </div>
+  </div>
 
-    <div class="full">
-      <%= f.label :commit_hash %>
-      <%= f.text_field :commit_hash, class: 'input' %>
-      <p class="small">Optional commit hash reference for reproducible snapshots</p>
+  <div class="card mt">
+    <h3>Skills</h3>
+    <div class="skills-select" data-skills-select>
+      <details>
+        <summary data-skills-summary>Select skills</summary>
+        <div class="skills-select-options">
+          <%= f.collection_check_boxes :skill_ids, Skill.all, :id, :name do |cb| %>
+            <label class="skills-select-option">
+              <%= cb.check_box %> <%= cb.text %>
+            </label>
+          <% end %>
+        </div>
+      </details>
+      <div class="skills-select-chips" data-skills-chips></div>
     </div>
   </div>
 
-  <% if @experience.experience_highlights.any? %>
-    <div class="card mt">
-      <h3>Highlights</h3>
-      <% f.fields_for :experience_highlights do |hf| %>
-        <div class="highlight-row">
-          <div>
-            <%= hf.label :text, 'Highlight' %>
-            <%= hf.text_field :text, class: 'input' %>
-          </div>
-          <div>
-            <%= hf.label :sort_order %>
-            <%= hf.number_field :sort_order, class: 'input', min: 0 %>
-          </div>
-          <div>
-            <%= hf.label :_destroy, 'Remove' %>
-            <%= hf.check_box :_destroy %>
-          </div>
-        </div>
+  <div class="card mt">
+    <h3>Highlights</h3>
+    <div id="highlight-rows">
+      <%= f.fields_for :experience_highlights do |hf| %>
+        <%= render 'highlight_fields', hf: hf %>
       <% end %>
     </div>
-  <% end %>
+
+    <button type="button" class="secondary mt add-fields-btn" data-fields-container="highlight-rows" data-fields-template="highlight-template">+ Add another highlight</button>
+
+    <template id="highlight-template">
+      <%= f.fields_for :experience_highlights, ExperienceHighlight.new, child_index: 'NEW_RECORD_INDEX' do |hf| %>
+        <%= render 'highlight_fields', hf: hf %>
+      <% end %>
+    </template>
+  </div>
 
   <div class="form-actions">
     <%= f.submit(@experience.persisted? ? 'Save experience' : 'Create experience', class: 'primary') %>

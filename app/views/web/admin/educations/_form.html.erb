@@ -64,10 +64,11 @@
       <% end %>
     </div>
 
-    <button type="button" id="add-milestone" class="secondary mt" data-milestones-container="milestone-rows" data-milestone-template="milestone-template">+ Add another milestone</button>
+
+    <button type="button" class="secondary mt add-fields-btn" data-fields-container="milestone-rows" data-fields-template="milestone-template">+ Add another milestone</button>
 
     <template id="milestone-template">
-      <%= f.fields_for :education_milestones, EducationMilestone.new, child_index: 'NEW_MILESTONE_INDEX' do |mf| %>
+      <%= f.fields_for :education_milestones, EducationMilestone.new, child_index: 'NEW_RECORD_INDEX' do |mf| %>
         <%= render 'milestone_fields', mf: mf %>
       <% end %>
     </template>

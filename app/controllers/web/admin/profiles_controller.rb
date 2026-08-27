@@ -17,7 +17,6 @@ module Web
         if @profile.update(profile_params)
           redirect_to admin_profile_path, notice: 'Profile updated successfully.'
         else
-          flash.now[:alert] = 'Unable to save profile. Please check the form.'
           render :edit
         end
       end
