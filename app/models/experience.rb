@@ -1,5 +1,5 @@
 class Experience < ApplicationRecord
-  has_many :experience_highlights, -> { order(sort_order: :asc) }, dependent: :destroy
+  has_many :experience_highlights, -> { order(sort_order: :asc) }, dependent: :destroy, inverse_of: :experience
   # Rejects rows with no highlight text, not :all_blank — the sort_order box
   # is auto-filled for every blank padding row, so :all_blank would never
   # see them as empty and they'd fail the ExperienceHighlight text presence

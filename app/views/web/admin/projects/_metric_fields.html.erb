@@ -1,0 +1,18 @@
+<div class="metrics-grid" data-fields-row>
+  <div>
+    <%= mf.label :label %>
+    <%= mf.text_field :label, class: 'input' %>
+  </div>
+  <div>
+    <%= mf.label :value %>
+    <%= mf.text_field :value, class: 'input' %>
+  </div>
+  <div>
+    <%= mf.label :sort_order %>
+    <%= mf.number_field :sort_order, class: 'input', min: 0, data: { sort_order_input: true } %>
+  </div>
+  <div class="metrics-remove">
+    <%= mf.check_box :_destroy, style: 'display: none' %>
+    <button type="button" class="secondary remove-fields-btn">Remove</button>
+  </div>
+</div>
