@@ -23,7 +23,9 @@
 .menu-list { list-style: none; padding: 0; margin: 0 }
 .menu-list li { margin-bottom: 4px }
 .menu-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 10px;
   color: rgba(250, 250, 247, 0.85);
   font-weight: 600;
@@ -31,6 +33,27 @@
   border-radius: var(--radius);
 }
 .menu-link:hover { background: var(--surface); color: var(--text) }
+
+.menu-link.active {
+  background: var(--surface);
+  color: var(--text);
+  border-left: 3px solid var(--accent);
+  padding-left: 7px;
+}
+
+.menu-icon { width: 16px; height: 16px; flex-shrink: 0 }
+
+.menu-submenu > summary.menu-link {
+  cursor: pointer;
+  list-style: none;
+}
+.menu-submenu > summary.menu-link::-webkit-details-marker { display: none }
+.menu-submenu > summary.menu-link::after { content: '▸'; margin-left: auto; color: var(--muted); font-size: 16px }
+.menu-submenu[open] > summary.menu-link::after { content: '▾' }
+
+.menu-sublist { list-style: none; padding: 0; margin: 2px 0 4px 12px }
+.menu-sublist li { margin-bottom: 4px }
+.menu-sublist .menu-link { font-weight: 500; font-size: 14px }
 
 @media (max-width: 880px) {
   .side-menu { transform: translateX(-280px) }
