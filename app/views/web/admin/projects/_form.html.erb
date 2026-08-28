@@ -1,4 +1,4 @@
-<%= form_with model: [:admin, @project], local: true do |f| %>
+<%= form_with model: [:admin, @project], local: true, data: (@project.persisted? ? { confirm_message: 'Are you sure do you want to save data?', confirm_action: 'Save', confirm_skip_unchanged: 'true' } : {}) do |f| %>
   <% if @project.errors.any? %>
     <div class="card form-errors">
       <p>Please fix the following errors:</p>
@@ -85,32 +85,39 @@
     </div>
   </div>
 
-  <% if @project.project_metrics.any? %>
-    <div class="card mt">
-      <h3>Project metrics</h3>
-      <% f.fields_for :project_metrics do |metric_fields| %>
-        <div class="metrics-grid">
-          <div>
-            <%= metric_fields.label :label %>
-            <%= metric_fields.text_field :label, class: 'input' %>
-          </div>
-          <div>
-            <%= metric_fields.label :value %>
-            <%= metric_fields.text_field :value, class: 'input' %>
-          </div>
-          <div>
-            <%= metric_fields.label :sort_order %>
-            <%= metric_fields.number_field :sort_order, class: 'input', min: 0 %>
-          </div>
-          <div class="metrics-remove">
-            <%= metric_fields.label :_destroy, 'Remove' %>
-            <%= metric_fields.check_box :_destroy %>
-          </div>
+  <div class="card mt">
+    <h3>Skills</h3>
+    <div class="skills-select" data-skills-select>
+      <details>
+        <summary data-skills-summary>Select skills</summary>
+        <div class="skills-select-options">
+          <%= f.collection_check_boxes :skill_ids, Skill.all, :id, :name do |cb| %>
+            <label class="skills-select-option">
+              <%= cb.check_box %> <%= cb.text %>
+            </label>
+          <% end %>
         </div>
-      <% end %>
-      <p class="small mt">Leave blank metric rows untouched.</p>
+      </details>
+      <div class="skills-select-chips" data-skills-chips></div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="card mt">
+    <h3>Project metrics</h3>
+    <div id="metric-rows">
+      <%= f.fields_for :project_metrics do |mf| %>
+        <%= render 'metric_fields', mf: mf %>
+      <% end %>
+    </div>
+
+    <button type="button" class="secondary mt add-fields-btn" data-fields-container="metric-rows" data-fields-template="metric-template">+ Add another metric</button>
+
+    <template id="metric-template">
+      <%= f.fields_for :project_metrics, ProjectMetric.new, child_index: 'NEW_RECORD_INDEX' do |mf| %>
+        <%= render 'metric_fields', mf: mf %>
+      <% end %>
+    </template>
+  </div>
 
   <div class="form-actions">
     <%= f.submit(@project.persisted? ? 'Save project' : 'Create project', class: 'primary') %>
