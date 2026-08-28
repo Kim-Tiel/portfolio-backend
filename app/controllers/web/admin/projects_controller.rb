@@ -66,12 +66,17 @@ module Web
           :sort_order,
           :started_on,
           :completed_on,
+          skill_ids: [],
           project_metrics_attributes: %i[id label value sort_order _destroy]
         )
       end
 
       def build_metric_rows
-        (3 - @project.project_metrics.size).times { @project.project_metrics.build }
+        next_sort_order = (@project.project_metrics.map(&:sort_order).max || -1) + 1
+        (1 - @project.project_metrics.size).times do
+          @project.project_metrics.build(sort_order: next_sort_order)
+          next_sort_order += 1
+        end
       end
     end
   end
