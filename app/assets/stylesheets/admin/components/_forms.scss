@@ -36,6 +36,11 @@ label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; t
   margin-top: 12px;
 }
 .metrics-remove { display: flex; flex-direction: column; gap: 6px }
+// Same fix as .highlight-row[hidden] below — .metrics-grid's own `display: grid`
+// otherwise beats the browser's default [hidden] { display: none }.
+.metrics-grid[hidden] {
+  display: none;
+}
 
 .metrics-grid[hidden] {
   display: none;
