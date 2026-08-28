@@ -4,7 +4,7 @@ class Project < ApplicationRecord
   has_many :project_skills, dependent: :destroy
   has_many :skills, through: :project_skills
 
-  has_many :project_metrics, -> { order(sort_order: :asc) }, dependent: :destroy
+  has_many :project_metrics, -> { order(sort_order: :asc) }, dependent: :destroy, inverse_of: :project
   accepts_nested_attributes_for :project_metrics, allow_destroy: true,
                                                   reject_if: proc { |attrs|
                                                     attrs['label'].blank? && attrs['value'].blank?

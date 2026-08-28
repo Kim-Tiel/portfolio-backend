@@ -37,6 +37,10 @@ label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; t
 }
 .metrics-remove { display: flex; flex-direction: column; gap: 6px }
 
+.metrics-grid[hidden] {
+  display: none;
+}
+
 .highlight-row {
   display: grid;
   grid-template-columns: 1fr 1fr auto;

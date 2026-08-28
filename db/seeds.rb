@@ -31,7 +31,18 @@ puts "Seeded profile: #{profile.name}"
 skills_data = [
   { name: "Ruby on Rails", category: "backend" },
   { name: "Vue.js", category: "frontend" },
-  { name: "React.js", category: "frontend" }
+  { name: "React.js", category: "frontend" },
+  { name: "GraphQL", category: "backend" },
+  { name: "Quasar", category: "frontend" },
+  { name: "Vuetify", category: "frontend" },
+  { name: "Pinia", category: "frontend" },
+  { name: "MySQL", category: "infrastructure" },
+  { name: "PostgreSQL", category: "infrastructure" },
+  { name: "Capybara", category: "backend" },
+  { name: "JasperReports", category: "backend" },
+  { name: "AWS", category: "infrastructure" },
+  { name: "Git", category: "infrastructure" },
+  { name: "GitHub", category: "infrastructure" }
 ]
 
 skills_by_name = {}
@@ -57,6 +68,40 @@ experiences_data = [
       "Developed automated test scripts using Capybara that simulated real user stories, increasing test coverage and significantly reducing manual testing effort."
     ],
     skills: ["Capybara"]
+  },
+  {
+    company: "Bliimo Technologies, Inc.",
+    role: "Backend Developer",
+    start_date: Date.new(2019, 6, 1),
+    end_date: Date.new(2020, 7, -1),
+    highlights: [
+      "Developed and maintained scalable RESTful APIs while establishing backend conventions and design patterns with the team, resulting in a more consistent and maintainable codebase.",
+      "Built automated test suites and validated API functionality using Postman and cURL, accelerating the QA process and reducing regression bugs before deployment."
+    ],
+    skills: []
+  },
+  {
+    company: "Venteny Inc.",
+    role: "Web Developer II",
+    start_date: Date.new(2020, 7, 1),
+    end_date: Date.new(2020, 12, -1),
+    highlights: [
+      "Delivered reusable frontend and backend code aligned with established architectural patterns, improving consistency across the codebase.",
+      "Took ownership of legacy AWS deployment processes, ensuring infrastructure continuity and zero service disruption during the transition from previous developers."
+    ],
+    skills: ["AWS"]
+  },
+  {
+    company: "Yondu Inc.",
+    role: "Software Engineer",
+    start_date: Date.new(2021, 3, 1),
+    end_date: Date.new(2026, 7, -1),
+    highlights: [
+      "Architected scalable backend systems and integrated third-party APIs while collaborating with cross-functional teams to define and ship new features, consistently meeting sprint delivery goals.",
+      "Implemented Google Analytics to track user behavior and application performance, providing data-driven insights that informed product decisions.",
+      "Drove comprehensive unit testing, bug fixing, and performance optimization initiatives, improving application reliability and measurably reducing production incidents."
+    ],
+    skills: []
   }
 ]
 

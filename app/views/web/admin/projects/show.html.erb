@@ -36,6 +36,17 @@
   </table>
 </div>
 
+<% if @project.skills.any? %>
+  <div class="card mt">
+    <h3>Skills</h3>
+    <div class="skills-select-chips">
+      <% @project.skills.each do |skill| %>
+        <span class="badge"><%= skill.name %></span>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% if @project.project_metrics.any? %>
   <div class="card mt">
     <h3>Metrics</h3>
