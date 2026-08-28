@@ -1,16 +1,74 @@
+<% nav_active = ->(path) { request.path.start_with?(path) } %>
+<% settings_active = nav_active.call(admin_resource_path('memory_log_entries')) || nav_active.call(admin_admins_path) %>
+
 <div id="sideMenu" class="side-menu" aria-hidden="false">
   <h4 class="menu-title">Content</h4>
   <nav>
     <ul class="menu-list">
-      <li><a href="/dashboard" class="menu-link">Dashboard</a></li>
-      <li><a href="<%= admin_profile_path %>" class="menu-link">Profile</a></li>
-      <li><a href="<%= admin_projects_path %>" class="menu-link">Projects</a></li>
-      <li><a href="<%= admin_skills_path %>" class="menu-link">Skills</a></li>
-      <li><a href="<%= admin_resource_path('experiences') %>" class="menu-link">Experiences</a></li>
-      <li><a href="<%= admin_resource_path('educations') %>" class="menu-link">Education</a></li>
-      <li><a href="<%= admin_resource_path('contact_messages') %>" class="menu-link">Contact Messages</a></li>
-      <li><a href="<%= admin_resource_path('memory_log_entries') %>" class="menu-link">Memory Logs</a></li>
-      <li><a href="<%= admin_admins_path %>" class="menu-link">Admins</a></li>
+      <li>
+        <a href="/dashboard" class="menu-link <%= 'active' if nav_active.call('/dashboard') %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_profile_path %>" class="menu-link <%= 'active' if nav_active.call(admin_profile_path) %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg>
+          Profile
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_projects_path %>" class="menu-link <%= 'active' if nav_active.call(admin_projects_path) %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>
+          Projects
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_skills_path %>" class="menu-link <%= 'active' if nav_active.call(admin_skills_path) %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg>
+          Skills
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_resource_path('experiences') %>" class="menu-link <%= 'active' if nav_active.call(admin_resource_path('experiences')) %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Experiences
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_resource_path('educations') %>" class="menu-link <%= 'active' if nav_active.call(admin_resource_path('educations')) %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+          Education
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_resource_path('contact_messages') %>" class="menu-link <%= 'active' if nav_active.call(admin_resource_path('contact_messages')) %>">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5l8.5 6 8.5-6"/></svg>
+          Contact Messages
+        </a>
+      </li>
+      <li>
+        <details class="menu-submenu" <%= 'open' if settings_active %>>
+          <summary class="menu-link <%= 'active' if settings_active %>">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.8"/><circle cx="16" cy="12" r="1.8"/><circle cx="10" cy="18" r="1.8"/></svg>
+            Settings
+          </summary>
+          <ul class="menu-sublist">
+            <li>
+              <a href="<%= admin_resource_path('memory_log_entries') %>" class="menu-link <%= 'active' if nav_active.call(admin_resource_path('memory_log_entries')) %>">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                Memory Log
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_admins_path %>" class="menu-link <%= 'active' if nav_active.call(admin_admins_path) %>">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/></svg>
+                Admin
+              </a>
+            </li>
+          </ul>
+        </details>
+      </li>
     </ul>
   </nav>
 </div>
