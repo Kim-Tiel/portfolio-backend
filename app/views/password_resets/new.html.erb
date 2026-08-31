@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio API — Login</title>
+  <title>Portfolio API — Forgot Password</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,28 +12,21 @@
 <body style="background-color: #000";>
   <div class="wrap">
     <%= image_tag 'logo.png', alt: '', class: 'login-logo' %>
-    <h1>Admin Login</h1>
-    <p class="subtitle">Portfolio CMS</p>
+    <h1>Forgot Password</h1>
+    <p class="subtitle">Enter your admin email to continue</p>
 
     <% if flash[:alert] %>
       <div class="result error"><%= flash[:alert] %></div>
     <% end %>
-    <% if flash[:notice] %>
-      <div class="result ok"><%= flash[:notice] %></div>
-    <% end %>
 
-    <%= form_tag login_path, method: :post do %>
+    <%= form_tag new_password_reset_path, method: :post do %>
       <label for="email">Email</label>
       <%= email_field_tag :email, nil, id: 'email', required: true, autocomplete: 'username' %>
 
-      <label for="password">Password</label>
-      <%= password_field_tag :password, nil, id: 'password', required: true, autocomplete: 'current-password' %>
-
-      <%= submit_tag 'Sign in', class: 'primary full-width' %>
+      <%= submit_tag 'Continue', class: 'primary full-width' %>
     <% end %>
 
-    <p class="form-links"><%= link_to 'Forgot password?', new_password_reset_path %></p>
+    <p class="form-links"><%= link_to 'Back to login', login_path %></p>
   </div>
-
 </body>
 </html>

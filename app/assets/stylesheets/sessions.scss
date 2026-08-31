@@ -63,6 +63,9 @@
 .wrap input[type="email"]:focus,
 .wrap input[type="password"]:focus { outline: 2px solid var(--accent); outline-offset: 1px }
 
+.wrap .form-links { margin-top: 16px; font-size: 13px; text-align: center }
+.wrap .form-links a { color: var(--accent) }
+
 .result {
   position: fixed;
   top: 16px;
