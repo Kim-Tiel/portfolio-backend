@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio API — Reset Password</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <%= stylesheet_link_tag 'sessions', media: 'all' %>
+</head>
+<body style="background-color: #000";>
+  <div class="wrap">
+    <%= image_tag 'logo.png', alt: '', class: 'login-logo' %>
+    <h1>Reset Password</h1>
+    <p class="subtitle">Minimum 8 characters</p>
+
+    <% if @admin.errors.any? %>
+      <div class="result error">
+        <ul>
+          <% @admin.errors.full_messages.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @admin, url: edit_password_reset_path, method: :patch, local: true do |f| %>
+      <label for="admin_password">New password</label>
+      <%= f.password_field :password, id: 'admin_password', required: true, autocomplete: 'new-password' %>
+
+      <label for="admin_password_confirmation">Confirm password</label>
+      <%= f.password_field :password_confirmation, id: 'admin_password_confirmation', required: true, autocomplete: 'new-password' %>
+
+      <%= f.submit 'Reset Password', class: 'primary full-width' %>
+    <% end %>
+  </div>
+</body>
+</html>
