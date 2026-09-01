@@ -1,0 +1,18 @@
+current directory: /home/ubuntu/portfolio-backend/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+/home/ubuntu/.rbenv/versions/3.2.11/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/ubuntu/portfolio-backend/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260825-66692-6xbgfi sitelibdir\=./.gem.20260825-66692-6xbgfi clean
+
+current directory: /home/ubuntu/portfolio-backend/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260825-66692-6xbgfi sitelibdir\=./.gem.20260825-66692-6xbgfi
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/ubuntu/portfolio-backend/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260825-66692-6xbgfi sitelibdir\=./.gem.20260825-66692-6xbgfi install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20260825-66692-6xbgfi
+
+current directory: /home/ubuntu/portfolio-backend/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260825-66692-6xbgfi sitelibdir\=./.gem.20260825-66692-6xbgfi clean
