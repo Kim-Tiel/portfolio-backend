@@ -24,6 +24,9 @@
 
 /config/master.key
 
+# Ignore local environment secrets.
+/.env
+
 # Ignore SimpleCov coverage output.
 
 /coverage/
