@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_08_31_125343) do
+ActiveRecord::Schema.define(version: 2026_08_31_143159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -150,7 +150,6 @@ ActiveRecord::Schema.define(version: 2026_08_31_125343) do
     t.integer "completed_projects"
     t.decimal "employer_satisfaction", precision: 5, scale: 2
     t.text "available_for", default: [], array: true
-    t.string "avatar_url"
     t.text "hero_tagline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

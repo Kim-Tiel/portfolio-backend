@@ -2,7 +2,7 @@
   <section class="card hero">
     <h2>Edit Profile</h2>
 
-    <%= form_with model: @profile, url: admin_profile_path, method: :patch, local: true do |f| %>
+    <%= form_with model: @profile, url: admin_profile_path, method: :patch, local: true, html: { multipart: true } do |f| %>
       <% if @profile.errors.any? %>
         <div class="card form-errors">
           <p>Please fix the following errors:</p>
@@ -62,8 +62,12 @@
         </div>
 
         <div class="full">
-          <%= f.label :avatar_url %>
-          <%= f.text_field :avatar_url, class: 'input' %>
+          <%= f.label :avatar, 'Avatar image' %>
+          <% if @profile.avatar.attached? %>
+            <p class="small"><img src="<%= @profile.avatar_url %>" alt="Current avatar" style="max-height: 80px; border-radius: 8px;" /></p>
+          <% end %>
+          <%= f.file_field :avatar, class: 'input', accept: 'image/png,image/jpeg,image/webp,image/gif' %>
+          <p class="small">PNG, JPEG, WebP, or GIF. Max 5MB.</p>
         </div>
       </div>
 
