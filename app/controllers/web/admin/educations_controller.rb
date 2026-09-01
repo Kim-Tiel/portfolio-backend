@@ -51,7 +51,7 @@ module Web
       end
 
       def education_params
-        params.require(:education).permit(:institution, :degree, :location, :sort_order,
+        params.require(:education).permit(:institution, :degree, :location, :sort_order, :field, :start_date, :end_date, :is_graduated,
                                           education_milestones_attributes: %i[id occurred_on description _destroy])
       end
 

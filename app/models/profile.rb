@@ -1,4 +1,8 @@
 class Profile < ApplicationRecord
+  include ImageAttachable
+
+  has_image :avatar
+
   validates :name, :title, presence: true
 
   def self.instance

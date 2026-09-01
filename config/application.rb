@@ -40,7 +40,7 @@ module PortfolioApi
 
     # Enable cookies and sessions for the small server-rendered UI (login/dashboard)
     # Uses cookie-based session store with a reasonable key.
-    config.session_store :cookie_store, key: '_portfolio_api_session'
+    config.session_store :cookie_store, key: '_portfolio_backend_session'
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     # Add flash middleware so views and controllers can use `flash` in this API-only app
