@@ -25,16 +25,28 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+# `has_image` is a declarative association macro in the style of Rails'
+# `has_one_attached`, not a predicate.
+Naming/PredicatePrefix:
+  AllowedMethods:
+    - has_image
+
+# Migrations are linear schema DSL — length/complexity limits don't apply.
 Metrics/MethodLength:
   Max: 20
+  Exclude:
+    - "db/migrate/**/*"
 
 Metrics/AbcSize:
   Max: 25
+  Exclude:
+    - "db/migrate/**/*"
 
 Metrics/BlockLength:
   Max: 30
   Exclude:
     - "config/routes.rb"
+    - "spec/**/*"
 
 Layout/LineLength:
   Max: 130

@@ -36,7 +36,7 @@ module Web
           :years_career_experience,
           :completed_projects,
           :employer_satisfaction,
-          :avatar_url,
+          :avatar,
           :hero_tagline,
           :available_for,
           { available_for: [] }
