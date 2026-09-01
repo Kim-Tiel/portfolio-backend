@@ -14,7 +14,10 @@ Rails.application.routes.draw do
 
       # --- Admin, JWT-protected ---
       namespace :admin do
-        resource :profile, only: %i[show update]
+        resource :profile, only: %i[show update] do
+          put :avatar, to: 'profiles#update_avatar'
+          delete :avatar, to: 'profiles#destroy_avatar'
+        end
         resources :skills
         resources :projects
         resources :experiences
