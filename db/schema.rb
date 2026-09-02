@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_08_31_143159) do
+ActiveRecord::Schema.define(version: 2026_09_02_104203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 2026_08_31_143159) do
     t.text "hero_tagline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "bio"
   end
 
   create_table "project_metrics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -205,7 +206,9 @@ ActiveRecord::Schema.define(version: 2026_08_31_143159) do
     t.integer "sort_order", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_featured", default: false, null: false
     t.index ["category"], name: "index_skills_on_category"
+    t.index ["is_featured"], name: "index_skills_on_is_featured"
     t.index ["name"], name: "index_skills_on_name", unique: true
   end
 

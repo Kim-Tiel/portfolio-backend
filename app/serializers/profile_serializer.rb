@@ -14,7 +14,8 @@ class ProfileSerializer
       employer_satisfaction: @profile.employer_satisfaction,
       available_for: @profile.available_for,
       avatar_url: @profile.avatar_url,
-      hero_tagline: @profile.hero_tagline
+      hero_tagline: @profile.hero_tagline,
+      bio: @profile.bio
     }
   end
 end
