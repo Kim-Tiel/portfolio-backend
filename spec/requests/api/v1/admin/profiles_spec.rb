@@ -10,14 +10,10 @@ RSpec.describe 'Api::V1::Admin::Profiles avatar', type: :request do
 
   let(:auth) { { 'Authorization' => "Bearer #{token}" } }
 
-  def upload(name, content_type)
-    Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files', name), content_type)
-  end
-
   describe 'PUT /api/v1/admin/profile/avatar' do
     it 'attaches the uploaded image and returns its url' do
       put '/api/v1/admin/profile/avatar',
-          params: { avatar: upload('avatar.png', 'image/png') }, headers: auth
+          params: { avatar: image_upload }, headers: auth
 
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['avatar_url']).to match(%r{/rails/active_storage/blobs/.*avatar\.png\z})
@@ -26,7 +22,7 @@ RSpec.describe 'Api::V1::Admin::Profiles avatar', type: :request do
 
     it 'rejects a non-image upload' do
       put '/api/v1/admin/profile/avatar',
-          params: { avatar: upload('not_an_image.txt', 'text/plain') }, headers: auth
+          params: { avatar: non_image_upload }, headers: auth
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(JSON.parse(response.body)['errors']).to be_present
@@ -34,7 +30,7 @@ RSpec.describe 'Api::V1::Admin::Profiles avatar', type: :request do
     end
 
     it 'requires authentication' do
-      put '/api/v1/admin/profile/avatar', params: { avatar: upload('avatar.png', 'image/png') }
+      put '/api/v1/admin/profile/avatar', params: { avatar: image_upload }
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -42,7 +38,7 @@ RSpec.describe 'Api::V1::Admin::Profiles avatar', type: :request do
 
   describe 'DELETE /api/v1/admin/profile/avatar' do
     it 'removes the attached image' do
-      Profile.instance.update!(avatar: upload('avatar.png', 'image/png'))
+      Profile.instance.update!(avatar: image_upload)
 
       delete '/api/v1/admin/profile/avatar', headers: auth
 

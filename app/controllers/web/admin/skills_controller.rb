@@ -46,7 +46,7 @@ module Web
       end
 
       def skill_params
-        params.require(:skill).permit(:name, :category, :proficiency, :icon_slug, :sort_order)
+        params.require(:skill).permit(:name, :category, :proficiency, :icon_slug, :sort_order, :is_featured)
       end
     end
   end
