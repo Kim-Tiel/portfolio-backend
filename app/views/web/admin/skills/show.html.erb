@@ -16,6 +16,7 @@
         ['Name', @skill.name],
         ['Category', @skill.category.titleize],
         ['Proficiency', @skill.proficiency],
+        ['Featured', @skill.is_featured ? 'Yes' : 'No'],
         ['Icon slug', @skill.icon_slug],
         ['Sort order', @skill.sort_order]
       ].each do |label, value| %>

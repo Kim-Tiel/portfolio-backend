@@ -17,4 +17,5 @@ class Skill < ApplicationRecord
   validates :category, presence: true
 
   default_scope { order(sort_order: :asc, name: :asc) }
+  scope :featured, -> { where(is_featured: true) }
 end

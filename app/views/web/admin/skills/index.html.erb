@@ -15,6 +15,7 @@
         <th>Name</th>
         <th>Category</th>
         <th>Proficiency</th>
+        <th>Featured</th>
         <th>Sort</th>
         <th>Actions</th>
       </tr>
@@ -25,6 +26,7 @@
           <td><%= skill.name %></td>
           <td><%= skill.category.titleize %></td>
           <td class="meta"><%= skill.proficiency %></td>
+          <td><%= skill.is_featured ? 'Yes' : 'No' %></td>
           <td class="meta"><%= skill.sort_order %></td>
           <td class="actions">
             <%= link_to 'View', admin_skill_path(skill), class: 'secondary' %>

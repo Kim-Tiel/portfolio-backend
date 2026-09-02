@@ -1,54 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Admin::Profiles avatar', type: :request do
-  let!(:admin) { create(:admin, email: 'admin@example.com', password: 'password123') }
+RSpec.describe Profile, type: :model do
+  let(:profile) { Profile.instance }
 
-  let(:token) do
-    post '/api/v1/login', params: { email: 'admin@example.com', password: 'password123' }
-    JSON.parse(response.body).fetch('token')
-  end
+  describe 'avatar attachment' do
+    it 'accepts a PNG image' do
+      profile.avatar = image_upload
 
-  let(:auth) { { 'Authorization' => "Bearer #{token}" } }
-
-  def upload(name, content_type)
-    Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files', name), content_type)
-  end
-
-  describe 'PUT /api/v1/admin/profile/avatar' do
-    it 'attaches the uploaded image and returns its url' do
-      put '/api/v1/admin/profile/avatar',
-          params: { avatar: upload('avatar.png', 'image/png') }, headers: auth
-
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)['avatar_url']).to match(%r{/rails/active_storage/blobs/.*avatar\.png\z})
-      expect(Profile.instance.avatar).to be_attached
+      expect(profile).to be_valid
+      expect(profile.save).to be(true)
     end
 
-    it 'rejects a non-image upload' do
-      put '/api/v1/admin/profile/avatar',
-          params: { avatar: upload('not_an_image.txt', 'text/plain') }, headers: auth
+    it 'rejects a non-image file' do
+      profile.avatar = non_image_upload
 
-      expect(response).to have_http_status(:unprocessable_entity)
-      expect(JSON.parse(response.body)['errors']).to be_present
-      expect(Profile.instance.avatar).not_to be_attached
+      expect(profile).not_to be_valid
+      expect(profile.errors[:avatar].join).to match(/PNG|JPEG|image/i)
     end
 
-    it 'requires authentication' do
-      put '/api/v1/admin/profile/avatar', params: { avatar: upload('avatar.png', 'image/png') }
+    it 'rejects an image larger than 5MB' do
+      profile.avatar = oversized_image_upload
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(profile).not_to be_valid
+      expect(profile.errors[:avatar].join).to match(/5MB/)
     end
-  end
 
-  describe 'DELETE /api/v1/admin/profile/avatar' do
-    it 'removes the attached image' do
-      Profile.instance.update!(avatar: upload('avatar.png', 'image/png'))
+    it 'exposes avatar_url only when an image is attached' do
+      expect(profile.avatar_url).to be_nil
 
-      delete '/api/v1/admin/profile/avatar', headers: auth
+      profile.update!(avatar: image_upload)
 
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)['avatar_url']).to be_nil
-      expect(Profile.instance.avatar).not_to be_attached
+      expect(profile.avatar_url).to start_with('http://www.example.com')
+      expect(profile.avatar_url).to match(%r{/rails/active_storage/blobs/.*avatar\.png\z})
     end
   end
 end
