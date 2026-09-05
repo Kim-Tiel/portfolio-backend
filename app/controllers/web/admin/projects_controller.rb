@@ -6,7 +6,7 @@ module Web
       before_action :set_project, only: %i[show edit update destroy]
 
       def index
-        @projects = Project.order(sort_order: :asc)
+        @projects = Project.order(sort_order: :asc).page(params[:page]).per(params[:per_page])
       end
 
       def show; end
