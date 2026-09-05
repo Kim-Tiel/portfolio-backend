@@ -1,14 +1,3 @@
-# Reusable single-image attachment for any model.
-#
-#   class Project < ApplicationRecord
-#     include ImageAttachable
-#     has_image :cover
-#   end
-#
-# Provides, per declared image:
-#   * an Active Storage `has_one_attached` association
-#   * content-type and size validation (see ALLOWED_CONTENT_TYPES / MAX_SIZE)
-#   * a `<name>_url` helper returning the Rails proxy URL, or nil when unattached
 module ImageAttachable
   extend ActiveSupport::Concern
 

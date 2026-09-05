@@ -30,9 +30,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  get   'forgot_password',      to: 'password_resets#new',   as: 'new_password_reset'
+  get   'forgot_password',      to: 'password_resets#new', as: 'new_password_reset'
   post  'forgot_password',      to: 'password_resets#create'
-  get   'forgot_password/edit', to: 'password_resets#edit',  as: 'edit_password_reset'
+  get   'forgot_password/edit', to: 'password_resets#edit', as: 'edit_password_reset'
   patch 'forgot_password/edit', to: 'password_resets#update'
 
   get 'dashboard', to: 'dashboards#index'

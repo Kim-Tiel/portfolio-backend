@@ -115,6 +115,7 @@ GEM
     faker (3.8.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.17.4-arm64-darwin)
+    ffi (1.17.4-x86_64-linux-gnu)
     globalid (1.4.0)
       activesupport (>= 6.1)
     i18n (1.15.2)
@@ -159,11 +160,14 @@ GEM
     nio4r (2.7.5)
     nokogiri (1.19.4-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-linux-gnu)
+      racc (~> 1.4)
     parallel (1.28.0)
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
     pg (1.6.3-arm64-darwin)
+    pg (1.6.3-x86_64-linux)
     prism (1.9.0)
     puma (5.6.9)
       nio4r (~> 2.0)
@@ -279,6 +283,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-25
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3 (~> 1)

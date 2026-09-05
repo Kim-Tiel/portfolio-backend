@@ -8,6 +8,9 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Deterministic origin for the CORS request spec to assert against.
+  ENV['PORTFOLIO_WEB_ORIGINS'] ||= 'http://localhost:5173'
+
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 

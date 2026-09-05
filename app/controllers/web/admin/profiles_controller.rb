@@ -38,6 +38,7 @@ module Web
           :employer_satisfaction,
           :avatar,
           :hero_tagline,
+          :bio,
           :available_for,
           { available_for: [] }
         )

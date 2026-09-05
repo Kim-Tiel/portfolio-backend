@@ -35,6 +35,14 @@
       <%= f.label :sort_order %>
       <%= f.number_field :sort_order, class: 'input', min: 0 %>
     </div>
+
+    <div>
+      <%= f.label :is_featured %>
+      <div class="checkbox-field">
+        <%= f.check_box :is_featured %>
+        <%= f.label :is_featured, 'Featured skill' %>
+      </div>
+    </div>
   </div>
 
   <div class="form-actions">
