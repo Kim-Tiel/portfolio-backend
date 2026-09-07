@@ -12,6 +12,7 @@ gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 gem 'aws-sdk-s3', '~> 1', require: false
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+gem 'kaminari'
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'sassc-rails'

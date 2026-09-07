@@ -5,7 +5,11 @@ module Api
         before_action :set_project, only: %i[show update destroy]
 
         def index
-          render json: Project.all.map { |p| ProjectSerializer.new(p).as_json }
+          projects = paginate(Project.all)
+          render json: {
+            data: projects.map { |p| ProjectSerializer.new(p).as_json },
+            meta: pagination_meta(projects)
+          }
         end
 
         def show

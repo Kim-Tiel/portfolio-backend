@@ -3,6 +3,12 @@
 @import "admin/variables";
 @import "admin/components/buttons";
 
+// The layout no longer hardcodes a black body background inline (that was
+// the pre-redesign look) — restate it here as the themed --ink token so
+// removing that inline style didn't quietly leave the page on the light
+// background _variables.scss sets for the public-site-toned admin content.
+body { background: var(--ink) }
+
 .full-width { display: block; width: 100%; margin-top: 20px; font-size: 15px; padding: 10px }
 
 .wrap {
@@ -27,12 +33,15 @@
 .wrap::before { top: -1px; left: -1px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent) }
 .wrap::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--accent-2); border-right: 2px solid var(--accent-2) }
 
-.login-logo {
+// Text brand mark — matches the public frontend's plain "KT." wordmark
+// (no image, no circle) instead of the old logo.png orb, so the login
+// screen and the public site read as the same product.
+.brand-mark {
   display: block;
-  width: 72px;
-  height: 72px;
   margin: 0 auto 16px;
-  border-radius: 50%;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .wrap h1 {
@@ -43,7 +52,7 @@
   background-clip: text;
   color: transparent;
 }
-.wrap .subtitle { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); margin: 0 0 20px }
+.wrap .subtitle { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); margin: 0 0 20px }
 
 .wrap form { text-align: left }
 

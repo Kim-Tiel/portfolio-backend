@@ -1,0 +1,82 @@
+/* Kaminari's default `paginate` markup: <nav class="pagination"> containing
+   <span class="page">, .current, .first, .last, .next, .prev, .page.gap.
+   Disabled prev/next/first/last render as plain text (no <a>) via
+   link_to_unless, so the muted color lives on the wrapping span and the
+   button chrome lives on the <a> alone to avoid double-boxing. */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 24px;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+// On narrow screens a page count past ~6-7 pages overflows a single
+// flex-end row off the right edge of the viewport with nothing to scroll
+// it into view — this is what actually broke on mobile. Wrapping instead
+// of scrolling suits pagination better than the table's horizontal-scroll
+// pattern: each page link is a small, independent tap target, not a row
+// that needs to stay aligned with a header.
+@media (max-width: 480px) {
+  .pagination {
+    justify-content: center;
+  }
+}
+
+.pagination a,
+.pagination .page.current {
+  display: inline-block;
+  min-width: 32px;
+  padding: 6px 10px;
+  text-align: center;
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease,
+    transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pagination a:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  background: rgba(167, 139, 250, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(167, 139, 250, 0.15);
+}
+
+.pagination a:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.pagination .page.current {
+  background: var(--gradient);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.35);
+}
+
+// .first/.prev/.next/.last render as `<span class="first">…</span>` with
+// no <a> inside when disabled (link_to_unless returns plain text, not a
+// nested tag) — :not(:has(a)) targets exactly that disabled state so it
+// visibly reads as unavailable instead of looking like every other pill.
+.pagination .first:not(:has(a)),
+.pagination .prev:not(:has(a)),
+.pagination .next:not(:has(a)),
+.pagination .last:not(:has(a)) {
+  display: inline-block;
+  padding: 6px 10px;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.pagination .page.gap {
+  padding: 6px 4px;
+  color: var(--muted);
+}

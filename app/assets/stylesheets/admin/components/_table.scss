@@ -9,11 +9,19 @@
   text-align: left;
   padding: 10px;
   font-size: 12px;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: ui-monospace, monospace;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--muted);
   border-bottom: 1px solid var(--line-strong);
+}
+
+// The Actions column is always last (see any index view) — right-align
+// its header to match where the buttons actually sit in the body below,
+// instead of labeling a left-aligned header over a right-aligned column.
+// Detail (key/value) tables have no header row, so this never applies there.
+.table:not(.detail-table) th:last-child {
+  text-align: right;
 }
 
 .table td {
@@ -24,7 +32,13 @@
 
 .table tbody tr:last-child td { border-bottom: none }
 
-.table .actions { white-space: nowrap }
+// Create/View/Edit/Delete always sit at the end of the row, right-aligned
+// within their column, so every list page's action buttons line up in
+// the same place regardless of how many columns come before them.
+.table .actions {
+  white-space: nowrap;
+  text-align: right;
+}
 .table .actions > * + * { margin-left: 6px }
 
 // Detail (key/value) table for show pages.

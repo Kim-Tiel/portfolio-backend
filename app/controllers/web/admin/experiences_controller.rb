@@ -6,7 +6,7 @@ module Web
       before_action :set_experience, only: %i[show edit update destroy]
 
       def index
-        @experiences = Experience.all
+        @experiences = Experience.all.page(params[:page]).per(params[:per_page])
       end
 
       def show; end

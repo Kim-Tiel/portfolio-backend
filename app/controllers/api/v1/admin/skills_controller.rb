@@ -5,7 +5,11 @@ module Api
         before_action :set_skill, only: %i[show update destroy]
 
         def index
-          render json: Skill.all.map { |s| SkillSerializer.new(s).as_json }
+          skills = paginate(Skill.all)
+          render json: {
+            data: skills.map { |s| SkillSerializer.new(s).as_json },
+            meta: pagination_meta(skills)
+          }
         end
 
         def show

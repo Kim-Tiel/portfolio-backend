@@ -5,7 +5,11 @@ module Api
         before_action :set_experience, only: %i[show update destroy]
 
         def index
-          render json: Experience.all.map { |e| ExperienceSerializer.new(e).as_json }
+          experiences = paginate(Experience.all)
+          render json: {
+            data: experiences.map { |e| ExperienceSerializer.new(e).as_json },
+            meta: pagination_meta(experiences)
+          }
         end
 
         def show

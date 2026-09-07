@@ -53,11 +53,10 @@
   letter-spacing: 0.02em;
 }
 
-.brand-logo {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius);
-  object-fit: cover;
+// Text brand mark — matches the public frontend's plain "KT." wordmark,
+// inheriting .brand's bold 16px instead of sizing an image.
+.brand-mark {
+  line-height: 1;
 }
 
 .btn {
@@ -86,5 +85,4 @@
   .header-inner { padding: 0 12px }
   .site-header { padding: 10px 0 }
   .burger { display: inline-flex; align-items: center; justify-content: center }
-  .brand-logo { width: 44px; height: 44px }
 }
