@@ -15,6 +15,9 @@
     <% if flash[:alert] %>
       <div class="result error"><%= flash[:alert] %></div>
     <% end %>
+    <% if flash[:notice] %>
+      <div class="result ok"><%= flash[:notice] %></div>
+    <% end %>
 
     <%= form_tag new_password_reset_path, method: :post do %>
       <label for="email">Email</label>

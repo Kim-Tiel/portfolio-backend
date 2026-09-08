@@ -50,6 +50,9 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # Needed so mailer views can build absolute URLs (e.g. the password reset link).
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
