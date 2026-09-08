@@ -21,6 +21,33 @@ module UploadHelpers
     image_upload(bytes: '0' * (megabytes * 1.megabyte))
   end
 
+  # Minimal but structurally valid single-page PDF.
+  MINIMAL_PDF = <<~PDF.freeze
+    %PDF-1.1
+    1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+    2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+    3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] >> endobj
+    xref
+    0 4
+    0000000000 65535 f
+    trailer << /Size 4 /Root 1 0 R >>
+    startxref
+    0
+    %%EOF
+  PDF
+
+  def pdf_upload(filename: 'resume.pdf', content_type: 'application/pdf', bytes: MINIMAL_PDF)
+    uploaded_file(filename, content_type, bytes)
+  end
+
+  def non_pdf_upload(filename: 'not_a_pdf.txt')
+    uploaded_file(filename, 'text/plain', 'this is not a pdf')
+  end
+
+  def oversized_pdf_upload(megabytes: 11)
+    pdf_upload(bytes: MINIMAL_PDF + ('0' * (megabytes * 1.megabyte)))
+  end
+
   private
 
   def uploaded_file(filename, content_type, bytes)

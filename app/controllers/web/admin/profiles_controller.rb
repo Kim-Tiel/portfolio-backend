@@ -29,24 +29,20 @@ module Web
 
       def profile_params
         permitted = params.require(:profile).permit(
-          :name,
-          :title,
-          :location,
-          :timezone,
-          :years_career_experience,
-          :completed_projects,
-          :employer_satisfaction,
-          :avatar,
-          :hero_tagline,
-          :bio,
-          :available_for,
-          { available_for: [] }
+          :first_name, :middle_name, :last_name, :title, :location, :timezone,
+          :years_career_experience, :completed_projects, :employer_satisfaction,
+          :avatar, :resume, :hero_tagline, :bio, :email, :linkedin_url, :github_url,
+          :available_for, available_for: []
         )
 
-        available_for_value = params.dig(:profile, :available_for)
-        if available_for_value.is_a?(String)
-          permitted[:available_for] = available_for_value.to_s.split(',').map(&:strip).reject(&:blank?)
-        end
+        normalize_available_for(permitted)
+      end
+
+      # The form submits `available_for` as a comma-separated string; the
+      # model expects an array, so split it here before assignment.
+      def normalize_available_for(permitted)
+        value = params.dig(:profile, :available_for)
+        permitted[:available_for] = value.to_s.split(',').map(&:strip).reject(&:blank?) if value.is_a?(String)
 
         permitted
       end

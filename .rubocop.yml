@@ -25,11 +25,12 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-# `has_image` is a declarative association macro in the style of Rails'
-# `has_one_attached`, not a predicate.
+# `has_image`/`has_file` are declarative association macros in the style of
+# Rails' `has_one_attached`, not predicates.
 Naming/PredicatePrefix:
   AllowedMethods:
     - has_image
+    - has_file
 
 # Migrations are linear schema DSL — length/complexity limits don't apply.
 Metrics/MethodLength:

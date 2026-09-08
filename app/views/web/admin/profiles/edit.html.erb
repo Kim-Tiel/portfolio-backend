@@ -16,8 +16,18 @@
 
       <div class="form-grid">
         <div>
-          <%= f.label :name %>
-          <%= f.text_field :name, class: 'input', required: true %>
+          <%= f.label :first_name, 'First name' %>
+          <%= f.text_field :first_name, class: 'input', required: true %>
+        </div>
+
+        <div>
+          <%= f.label :middle_name, 'Middle name' %>
+          <%= f.text_field :middle_name, class: 'input' %>
+        </div>
+
+        <div>
+          <%= f.label :last_name, 'Last name' %>
+          <%= f.text_field :last_name, class: 'input', required: true %>
         </div>
 
         <div>
@@ -50,6 +60,21 @@
           <%= f.number_field :employer_satisfaction, class: 'input', step: '0.01', min: 0, max: 100 %>
         </div>
 
+        <div>
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'input' %>
+        </div>
+
+        <div>
+          <%= f.label :linkedin_url, 'LinkedIn URL' %>
+          <%= f.url_field :linkedin_url, class: 'input', placeholder: 'https://linkedin.com/in/...' %>
+        </div>
+
+        <div>
+          <%= f.label :github_url, 'GitHub URL' %>
+          <%= f.url_field :github_url, class: 'input', placeholder: 'https://github.com/...' %>
+        </div>
+
         <div class="full">
           <%= f.label :available_for, 'Available for (comma separated)' %>
           <%= f.text_field :available_for, value: (@profile.available_for || []).join(', '), class: 'input' %>
@@ -75,6 +100,15 @@
           <% end %>
           <%= f.file_field :avatar, class: 'input', accept: 'image/png,image/jpeg,image/webp,image/gif' %>
           <p class="small">PNG, JPEG, WebP, or GIF. Max 5MB.</p>
+        </div>
+
+        <div class="full">
+          <%= f.label :resume, 'Resume' %>
+          <% if @profile.resume.attached? %>
+            <p class="small"><%= link_to 'View current resume', @profile.resume_url, target: '_blank', rel: 'noopener' %></p>
+          <% end %>
+          <%= f.file_field :resume, class: 'input', accept: 'application/pdf' %>
+          <p class="small">PDF only. Max 10MB.</p>
         </div>
       </div>
 
