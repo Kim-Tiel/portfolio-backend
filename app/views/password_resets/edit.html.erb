@@ -23,6 +23,8 @@
     <% end %>
 
     <%= form_with model: @admin, url: edit_password_reset_path, method: :patch, local: true do |f| %>
+      <%= hidden_field_tag :token, @token %>
+
       <label for="admin_password">New password</label>
       <%= f.password_field :password, id: 'admin_password', required: true, autocomplete: 'new-password' %>
 
