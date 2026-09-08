@@ -17,6 +17,8 @@ Rails.application.routes.draw do
         resource :profile, only: %i[show update] do
           put :avatar, to: 'profiles#update_avatar'
           delete :avatar, to: 'profiles#destroy_avatar'
+          put :resume, to: 'profiles#update_resume'
+          delete :resume, to: 'profiles#destroy_resume'
         end
         resources :skills
         resources :projects

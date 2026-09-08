@@ -16,6 +16,21 @@
         <p class="mt muted"><%= simple_format(@profile.hero_tagline.to_s) %></p>
         <p class="mt muted"><%= simple_format(@profile.bio.to_s) %></p>
 
+        <div class="mt">
+          <% if @profile.email.present? %>
+            <span class="chip"><%= mail_to @profile.email %></span>
+          <% end %>
+          <% if @profile.linkedin_url.present? %>
+            <span class="chip"><%= link_to 'LinkedIn', @profile.linkedin_url, target: '_blank', rel: 'noopener' %></span>
+          <% end %>
+          <% if @profile.github_url.present? %>
+            <span class="chip"><%= link_to 'GitHub', @profile.github_url, target: '_blank', rel: 'noopener' %></span>
+          <% end %>
+          <% if @profile.resume.attached? %>
+            <span class="chip"><%= link_to 'Resume', @profile.resume_url, target: '_blank', rel: 'noopener' %></span>
+          <% end %>
+        </div>
+
         <div class="stats">
           <div class="stat">
             <h3><%= @profile.years_career_experience || 0 %>+</h3>
