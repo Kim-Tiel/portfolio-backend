@@ -61,6 +61,16 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+  # Deliver mail through AWS SES, reusing the same AWS credentials/region already
+  # configured for S3 (aws-sdk-rails wires ActionMailer to SES automatically).
+  config.action_mailer.delivery_method = :ses
+
+  # Used to build absolute URLs (e.g. the password reset link) inside mailer views.
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch('MAILER_HOST'),
+    protocol: 'https'
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true

@@ -1,5 +1,9 @@
 class PasswordResetsController < Web::BaseController
-  before_action :require_reset_admin, only: %i[edit update]
+  RESET_TOKEN_EXPIRY = 30.minutes
+
+  # Shown after `create` regardless of whether the email matched an account,
+  # so a visitor can't use this form to check which emails have an account.
+  GENERIC_SENT_MESSAGE = "If an account with that email exists, we've sent a password reset link to it.".freeze
 
   def new; end
 
@@ -7,20 +11,26 @@ class PasswordResetsController < Web::BaseController
     admin = ::Admin.find_by(email: params[:email]&.downcase)
 
     if admin
-      session[:password_reset_admin_id] = admin.id
-      redirect_to edit_password_reset_path
-    else
-      flash.now[:alert] = 'No account found with that email.'
-      render :new, status: :unprocessable_entity
+      token = admin.signed_id(purpose: :password_reset, expires_in: RESET_TOKEN_EXPIRY)
+      PasswordMailer.reset_password(admin, token).deliver_later
     end
+
+    flash.now[:notice] = GENERIC_SENT_MESSAGE
+    render :new
   end
 
   def edit
-    @admin = reset_admin
+    @admin = admin_from_token(params[:token])
+    return redirect_to_expired unless @admin
+
+    @token = params[:token]
   end
 
   def update
-    @admin = reset_admin
+    @admin = admin_from_token(params[:token])
+    return redirect_to_expired unless @admin
+
+    @token = params[:token]
 
     if params.dig(:admin, :password).blank?
       @admin.errors.add(:password, "can't be blank")
@@ -28,7 +38,6 @@ class PasswordResetsController < Web::BaseController
     end
 
     if @admin.update(password_params)
-      session.delete(:password_reset_admin_id)
       render :success
     else
       render :edit, status: :unprocessable_entity
@@ -37,14 +46,16 @@ class PasswordResetsController < Web::BaseController
 
   private
 
-  def reset_admin
-    ::Admin.find(session[:password_reset_admin_id])
+  # Verifies the token is well-formed, unexpired, and issued for this
+  # purpose — returns nil (instead of raising) for anything invalid.
+  def admin_from_token(token)
+    return nil if token.blank?
+
+    ::Admin.find_signed(token, purpose: :password_reset)
   end
 
-  def require_reset_admin
-    return if session[:password_reset_admin_id]
-
-    redirect_to new_password_reset_path, alert: 'Please enter your email first.'
+  def redirect_to_expired
+    redirect_to new_password_reset_path, alert: 'That reset link is invalid or has expired.'
   end
 
   def password_params
