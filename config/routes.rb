@@ -21,7 +21,12 @@ Rails.application.routes.draw do
           delete :resume, to: 'profiles#destroy_resume'
         end
         resources :skills
-        resources :projects
+        resources :projects do
+          member do
+            put :image, to: 'projects#update_image'
+            delete :image, to: 'projects#destroy_image'
+          end
+        end
         resources :experiences
         resources :education, controller: 'educations'
       end

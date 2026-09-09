@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_09_08_123056) do
+ActiveRecord::Schema.define(version: 2026_09_09_082403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -192,7 +192,6 @@ ActiveRecord::Schema.define(version: 2026_09_08_123056) do
     t.string "status", default: "live", null: false
     t.string "site_url"
     t.string "repo_url"
-    t.string "image_url"
     t.boolean "is_featured", default: false, null: false
     t.integer "sort_order", default: 0, null: false
     t.date "started_on"

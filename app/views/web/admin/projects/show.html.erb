@@ -10,6 +10,11 @@
 </div>
 
 <div class="card mt">
+  <p class="small">Image<%= ' (default placeholder — none uploaded)' unless @project.image.attached? %></p>
+  <img src="<%= @project.image_url %>" alt="<%= @project.title %>" style="max-height: 200px; border-radius: 8px;" />
+</div>
+
+<div class="card mt">
   <table class="table detail-table">
     <tbody>
       <% [
@@ -22,7 +27,6 @@
         ['Completed date', @project.completed_on],
         ['Site URL', @project.site_url],
         ['Repo URL', @project.repo_url],
-        ['Image URL', @project.image_url],
         ['Sort order', @project.sort_order],
         ['Summary', @project.summary],
         ['Description', @project.description]
