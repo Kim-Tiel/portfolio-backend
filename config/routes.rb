@@ -20,7 +20,12 @@ Rails.application.routes.draw do
           put :resume, to: 'profiles#update_resume'
           delete :resume, to: 'profiles#destroy_resume'
         end
-        resources :skills
+        resources :skills do
+          member do
+            put :icon, to: 'skills#update_icon'
+            delete :icon, to: 'skills#destroy_icon'
+          end
+        end
         resources :projects do
           member do
             put :image, to: 'projects#update_image'

@@ -21,6 +21,18 @@ module UploadHelpers
     image_upload(bytes: '0' * (megabytes * 1.megabyte))
   end
 
+  MINIMAL_SVG = <<~SVG.freeze
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
+  SVG
+
+  def svg_upload(filename: 'icon.svg', content_type: 'image/svg+xml', bytes: MINIMAL_SVG)
+    uploaded_file(filename, content_type, bytes)
+  end
+
+  def oversized_svg_upload(megabytes: 2)
+    svg_upload(bytes: MINIMAL_SVG + "<!-- #{'0' * (megabytes * 1.megabyte)} -->")
+  end
+
   # Minimal but structurally valid single-page PDF.
   MINIMAL_PDF = <<~PDF.freeze
     %PDF-1.1
