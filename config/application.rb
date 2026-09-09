@@ -54,5 +54,16 @@ module PortfolioApi
     # Enable the asset pipeline for the admin UI in this API-only application.
     config.assets.enabled = true
     config.assets.paths << Rails.root.join('app', 'assets')
+
+    # Active Storage treats SVG as a "binary" content type by default (it can
+    # embed <script>, an XSS risk if served inline from our own origin) —
+    # every SVG blob gets served with Content-Type: application/octet-stream
+    # and Content-Disposition: attachment, which browsers refuse to render
+    # via <img>. Skill#icon is admin-only (see ImageAttachable/Skill#has_image
+    # — only an authenticated admin can upload one, never public/user input),
+    # so we accept that trade-off and allow SVG to render inline like any
+    # other image.
+    config.active_storage.content_types_to_serve_as_binary -= %w[image/svg+xml]
+    config.active_storage.content_types_allowed_inline += %w[image/svg+xml]
   end
 end
