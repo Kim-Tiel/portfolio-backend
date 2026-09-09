@@ -9,15 +9,21 @@
   </div>
 </div>
 
+<% if @skill.icon.attached? %>
+  <div class="card mt">
+    <img src="<%= @skill.icon_url %>" alt="<%= @skill.name %> icon" style="max-height: 64px; border-radius: 8px;" />
+  </div>
+<% end %>
+
 <div class="card mt">
   <table class="table detail-table">
     <tbody>
       <% [
         ['Name', @skill.name],
         ['Category', @skill.category.titleize],
-        ['Proficiency', @skill.proficiency],
+        ['Proficiency', @skill.proficiency.titleize],
+        ['Proficiency %', "#{@skill.proficiency_percent}%"],
         ['Featured', @skill.is_featured ? 'Yes' : 'No'],
-        ['Icon slug', @skill.icon_slug],
         ['Sort order', @skill.sort_order]
       ].each do |label, value| %>
         <tr>

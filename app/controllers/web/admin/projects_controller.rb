@@ -61,7 +61,7 @@ module Web
           :status,
           :site_url,
           :repo_url,
-          :image_url,
+          :image,
           :is_featured,
           :sort_order,
           :started_on,

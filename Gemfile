@@ -18,6 +18,12 @@ gem 'rack-attack'
 gem 'rack-cors'
 gem 'sassc-rails'
 
+# Admin dashboard charts — self-hosted (no external CDN), rendered via the
+# Sprockets asset pipeline like the rest of the admin JS. Chartkick vendors
+# its own Chart.js bundle, so no separate chart.js gem is needed.
+gem 'chartkick'
+gem 'groupdate'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'

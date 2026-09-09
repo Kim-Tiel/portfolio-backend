@@ -9,7 +9,8 @@ class SkillSerializer
       name: @skill.name,
       category: @skill.category,
       proficiency: @skill.proficiency,
-      icon_slug: @skill.icon_slug,
+      proficiency_percent: @skill.proficiency_percent,
+      icon_url: @skill.icon_url,
       is_featured: @skill.is_featured
     }
   end

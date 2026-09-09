@@ -1,0 +1,83 @@
+/* Dashboard: stat cards, two-column widget grid, content health checklist. */
+
+.stat-cards {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease-out, border-color 0.15s ease-out;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.stat-card-icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  color: var(--accent-strong);
+}
+.stat-card-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+.stat-card-label {
+  margin: 2px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+// Reuses the same 1fr/320px split as `.grid` elsewhere, just scoped with its
+// own name since this one sits below the stat cards rather than being the
+// page's only grid.
+.dashboard-grid {
+  margin-top: 18px;
+}
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.health-checklist {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.health-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.health-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.health-done .health-dot { background: var(--ok) }
+.health-pending .health-dot { background: var(--line-strong) }
+.health-pending { color: var(--muted) }
+
+@media (max-width: 1024px) {
+  .stat-cards { grid-template-columns: repeat(3, 1fr) }
+}
+
+// `.grid` (the base class this page's widget grid also uses) already
+// collapses to a single column at this breakpoint — see admin/_layout.scss.
+@media (max-width: 880px) {
+  .stat-cards { grid-template-columns: repeat(2, 1fr) }
+}

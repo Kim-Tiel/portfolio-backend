@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_09_08_123056) do
+ActiveRecord::Schema.define(version: 2026_09_09_102328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -192,7 +192,6 @@ ActiveRecord::Schema.define(version: 2026_09_08_123056) do
     t.string "status", default: "live", null: false
     t.string "site_url"
     t.string "repo_url"
-    t.string "image_url"
     t.boolean "is_featured", default: false, null: false
     t.integer "sort_order", default: 0, null: false
     t.date "started_on"
@@ -207,12 +206,12 @@ ActiveRecord::Schema.define(version: 2026_09_08_123056) do
   create_table "skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "category", null: false
-    t.string "proficiency", default: "proficient", null: false
-    t.string "icon_slug"
+    t.string "proficiency", default: "intermediate", null: false
     t.integer "sort_order", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_featured", default: false, null: false
+    t.integer "proficiency_percent", default: 80, null: false
     t.index ["category"], name: "index_skills_on_category"
     t.index ["is_featured"], name: "index_skills_on_is_featured"
     t.index ["name"], name: "index_skills_on_name", unique: true
