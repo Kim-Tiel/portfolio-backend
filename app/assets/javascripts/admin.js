@@ -1,3 +1,5 @@
+//= require chartkick
+//= require Chart.bundle
 //= require admin/components/menu
 //= require admin/components/flash
 //= require admin/components/nested_fields
