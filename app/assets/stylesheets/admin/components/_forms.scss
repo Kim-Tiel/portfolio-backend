@@ -28,6 +28,46 @@ label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; t
 .checkbox-field { margin-top: 8px; display: flex; align-items: center; gap: 6px }
 .checkbox-field label { display: inline; margin: 0; font-weight: 400 }
 
+.range-field { display: flex; align-items: center; gap: 12px }
+
+.range-slider {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--line-strong);
+  appearance: none;
+  cursor: pointer;
+}
+// Thumb styling needs separate vendor-prefixed rules — browsers ignore the
+// whole selector (not just the unsupported part) if combined into one.
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--paper);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--paper);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.range-value {
+  flex: none;
+  min-width: 3ch;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-strong);
+  text-align: right;
+}
+
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

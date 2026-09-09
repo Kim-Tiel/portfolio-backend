@@ -2,7 +2,8 @@ module Api
   module V1
     module Admin
       class SkillsController < BaseController
-        before_action :set_skill, only: %i[show update destroy]
+        before_action :authenticate_admin!
+        before_action :set_skill, only: %i[show update destroy update_icon destroy_icon]
 
         def index
           skills = paginate(Skill.all)
@@ -38,6 +39,20 @@ module Api
           head :no_content
         end
 
+        def update_icon
+          @skill.icon = params.require(:icon)
+          if @skill.save
+            render json: SkillSerializer.new(@skill).as_json
+          else
+            render json: { errors: @skill.errors.full_messages }, status: :unprocessable_entity
+          end
+        end
+
+        def destroy_icon
+          @skill.icon.purge
+          render json: SkillSerializer.new(@skill).as_json
+        end
+
         private
 
         def set_skill
@@ -45,7 +60,8 @@ module Api
         end
 
         def skill_params
-          params.require(:skill).permit(:name, :category, :proficiency, :icon_slug, :sort_order, :is_featured)
+          params.require(:skill).permit(:name, :category, :proficiency, :proficiency_percent, :sort_order,
+                                        :is_featured)
         end
       end
     end
