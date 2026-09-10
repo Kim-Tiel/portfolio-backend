@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "ipaddr"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -39,7 +40,12 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
+
+  # nginx terminates TLS on this host and overwrites X-Forwarded-For, so
+  # only loopback is a real proxy hop. Pinning this makes remote_ip (and
+  # thus rate limiting + ip_hash) unspoofable even if nginx changes.
+  config.action_dispatch.trusted_proxies = [IPAddr.new("127.0.0.1"), IPAddr.new("::1")]
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -48,8 +54,9 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Rack::Attack counts through Rails.cache. Make the store explicit and
+  # host-shared so throttle counters survive restarts.
+  config.cache_store = :file_store, Rails.root.join("tmp", "cache")
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
