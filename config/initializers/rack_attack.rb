@@ -10,6 +10,24 @@ class Rack::Attack
     req.params["email"].to_s.downcase.presence if req.post? && ["/login", "/api/v1/login"].include?(req.path)
   end
 
+  MEMORY_LOG_PATH = "/api/v1/memory_log_entries".freeze
+
+  def self.memory_log_post?(req)
+    req.post? && req.path == MEMORY_LOG_PATH
+  end
+
+  throttle("memory_log/ip/burst", limit: 3, period: 10.minutes) do |req|
+    req.ip if memory_log_post?(req)
+  end
+
+  throttle("memory_log/ip/day", limit: 10, period: 1.day) do |req|
+    req.ip if memory_log_post?(req)
+  end
+
+  throttle("memory_log/global", limit: 60, period: 1.hour) do |req|
+    "memory_log_global" if memory_log_post?(req)
+  end
+
   self.throttled_responder = lambda do |_request|
     [429, { "Content-Type" => "application/json" }, [{ error: "Too many requests, please try again later." }.to_json]]
   end
