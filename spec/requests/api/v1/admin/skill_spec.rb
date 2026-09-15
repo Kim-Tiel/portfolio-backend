@@ -88,6 +88,15 @@ RSpec.describe 'Api::V1::Admin::Skills', type: :request do
       expect(skill.reload.icon).not_to be_attached
     end
 
+    it 'rejects an SVG containing a script or event handler' do
+      skill = create(:skill)
+
+      put "/api/v1/admin/skills/#{skill.id}/icon", params: { icon: malicious_svg_upload }, headers: auth
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(skill.reload.icon).not_to be_attached
+    end
+
     it 'requires authentication' do
       skill = create(:skill)
 

@@ -2,6 +2,7 @@ module Api
   module V1
     module Admin
       class EducationsController < BaseController
+        before_action :authenticate_admin!
         before_action :set_education, only: %i[show update destroy]
 
         def index
