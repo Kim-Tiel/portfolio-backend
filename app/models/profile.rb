@@ -5,13 +5,13 @@ class Profile < ApplicationRecord
   has_image :avatar
   has_file :resume
 
-  URL_REGEXP = %r{\Ahttps?://}
+  URL_REGEXP = %r{\Ahttps?://\S+\z}
 
   before_validation :compute_name
 
   validates :first_name, :last_name, :title, presence: true
-  validates :linkedin_url, format: { with: URL_REGEXP, message: 'must start with http:// or https://' }, allow_blank: true
-  validates :github_url, format: { with: URL_REGEXP, message: 'must start with http:// or https://' }, allow_blank: true
+  validates :linkedin_url, format: { with: URL_REGEXP, message: 'must be a valid http:// or https:// URL' }, allow_blank: true
+  validates :github_url, format: { with: URL_REGEXP, message: 'must be a valid http:// or https:// URL' }, allow_blank: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 
   def self.instance
