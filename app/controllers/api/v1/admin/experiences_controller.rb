@@ -2,6 +2,7 @@ module Api
   module V1
     module Admin
       class ExperiencesController < BaseController
+        before_action :authenticate_admin!
         before_action :set_experience, only: %i[show update destroy]
 
         def index
