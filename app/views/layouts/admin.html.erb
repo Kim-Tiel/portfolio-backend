@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <title><%= content_for?(:title) ? yield(:title) : "Admin — Portfolio API" %></title>
+  <title><%= content_for?(:title) ? "#{yield(:title)} · Portfolio CMS" : "Portfolio CMS" %></title>
   <%= stylesheet_link_tag 'admin', media: 'all' %>
 </head>
 <body>

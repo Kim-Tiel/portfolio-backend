@@ -70,3 +70,6 @@ production:
   database: portfolio_backend_production
   username: portfolio_backend
   password: <%= ENV['PORTFOLIO_API_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
+  sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'prefer') %>

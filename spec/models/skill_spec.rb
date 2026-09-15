@@ -60,6 +60,20 @@ RSpec.describe Skill, type: :model do
       expect(skill.errors[:icon].join).to match(/1MB/)
     end
 
+    it 'rejects an SVG containing a <script> tag or an event handler' do
+      skill.icon = malicious_svg_upload
+
+      expect(skill).not_to be_valid
+      expect(skill.errors[:icon].join).to match(/script|event handler/i)
+    end
+
+    it 'rejects an SVG that is not well-formed XML' do
+      skill.icon = svg_upload(bytes: '<svg><unclosed>')
+
+      expect(skill).not_to be_valid
+      expect(skill.errors[:icon].join).to match(/valid SVG/i)
+    end
+
     it 'exposes the attached blob url when an icon is attached' do
       skill.update!(icon: svg_upload)
 
