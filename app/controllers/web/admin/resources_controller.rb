@@ -5,6 +5,8 @@ module Web
       before_action :authenticate_admin!
       ALLOWED_MODELS = %w[Admin Skill Project Experience Education ContactMessage MemoryLogEntry Profile].freeze
 
+      SENSITIVE_ATTRIBUTES = %w[password_digest].freeze
+
       def index
         resource = params[:resource].to_s
         model_name = resource.singularize.camelize
@@ -23,6 +25,7 @@ module Web
         @model_name = model_name
         @model = @model_name.safe_constantize
         @record = @model.find(params[:id])
+        @displayed_attributes = @record.attributes.except(*SENSITIVE_ATTRIBUTES)
       end
     end
   end
