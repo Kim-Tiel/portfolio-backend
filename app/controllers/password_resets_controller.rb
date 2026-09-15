@@ -12,6 +12,8 @@ class PasswordResetsController < Web::BaseController
 
     if admin
       token = admin.signed_id(purpose: :password_reset, expires_in: RESET_TOKEN_EXPIRY)
+
+      admin.update_column(:password_reset_token_digest, Digest::SHA256.hexdigest(token))
       PasswordMailer.reset_password(admin, token).deliver_later
     end
 
@@ -38,6 +40,7 @@ class PasswordResetsController < Web::BaseController
     end
 
     if @admin.update(password_params)
+      @admin.update_column(:password_reset_token_digest, nil)
       render :success
     else
       render :edit, status: :unprocessable_entity
@@ -46,12 +49,20 @@ class PasswordResetsController < Web::BaseController
 
   private
 
-  # Verifies the token is well-formed, unexpired, and issued for this
-  # purpose — returns nil (instead of raising) for anything invalid.
+  # Verifies the token is well-formed, unexpired, issued for this purpose,
+  # and — since a signed_id alone doesn't track usage — that it's still
+  # the one currently on file for this admin (see the comment in `create`).
+  # Returns nil, never raises, for anything invalid.
   def admin_from_token(token)
     return nil if token.blank?
 
-    ::Admin.find_signed(token, purpose: :password_reset)
+    admin = ::Admin.find_signed(token, purpose: :password_reset)
+    return nil unless admin&.password_reset_token_digest.present?
+    return nil unless ActiveSupport::SecurityUtils.secure_compare(
+      admin.password_reset_token_digest, Digest::SHA256.hexdigest(token)
+    )
+
+    admin
   end
 
   def redirect_to_expired

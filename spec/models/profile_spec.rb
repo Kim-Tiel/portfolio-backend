@@ -111,5 +111,17 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
       expect(profile.errors[:github_url]).to be_present
     end
+
+    it 'rejects a value that only starts with http(s):// but has nothing after it' do
+      profile.linkedin_url = 'https://'
+      expect(profile).not_to be_valid
+      expect(profile.errors[:linkedin_url]).to be_present
+    end
+
+    it 'rejects trailing whitespace or extra content after a valid-looking URL' do
+      profile.github_url = "https://github.com/kim\njavascript:alert(1)"
+      expect(profile).not_to be_valid
+      expect(profile.errors[:github_url]).to be_present
+    end
   end
 end

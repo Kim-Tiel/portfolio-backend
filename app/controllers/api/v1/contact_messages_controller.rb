@@ -3,7 +3,7 @@ module Api
     class ContactMessagesController < ApplicationController
       def create
         message = ContactMessage.new(contact_message_params)
-        message.ip_hash = Digest::SHA256.hexdigest(request.remote_ip.to_s)
+        message.ip_hash = ContactMessage.hash_ip(request.remote_ip)
 
         if message.save
           render json: { status: 'sent' }, status: :created
