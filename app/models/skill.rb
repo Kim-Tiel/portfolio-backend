@@ -5,6 +5,14 @@ class Skill < ApplicationRecord
   # avatar/Project image) — this is a small vector logo, not a picture.
   has_image :icon, allowed_types: %w[image/svg+xml], max_size: 1.megabyte, type_label: 'SVG image'
 
+  def icon=(attachable)
+    @icon_source_bytes = attachable.read if attachable.respond_to?(:read)
+    attachable.rewind if attachable.respond_to?(:rewind)
+    super
+  end
+
+  validate :icon_has_no_executable_content, if: -> { icon.attached? && icon.blob.content_type == 'image/svg+xml' }
+
   enum category: {
     language: 'language',
     frontend: 'frontend',
@@ -38,4 +46,21 @@ class Skill < ApplicationRecord
 
   default_scope { order(sort_order: :asc, name: :asc) }
   scope :featured, -> { where(is_featured: true) }
+
+  private
+
+  def icon_has_no_executable_content
+    return if @icon_source_bytes.nil?
+
+    doc = Nokogiri::XML(@icon_source_bytes) { |config| config.strict.nonet }
+    errors.add(:icon, 'must not contain scripts, embedded HTML, or event handlers') if svg_doc_has_executable_content?(doc)
+  rescue Nokogiri::XML::SyntaxError
+    errors.add(:icon, 'is not a valid SVG file')
+  end
+
+  def svg_doc_has_executable_content?(doc)
+    doc.xpath('//*[local-name()="script" or local-name()="foreignObject"]').any? ||
+      doc.xpath('//@*[starts-with(local-name(), "on")]').any? ||
+      doc.xpath('//@*').any? { |attr| attr.value.to_s.strip.downcase.start_with?('javascript:') }
+  end
 end
